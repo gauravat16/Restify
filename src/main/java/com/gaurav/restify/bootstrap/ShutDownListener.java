@@ -14,7 +14,7 @@ public class ShutDownListener {
 
     @EventListener(ContextClosedEvent.class)
     private void applicationStopped() {
-        logger.warn("Application forced to close!");
+        logger.debug("Application forced to close!");
     }
 
 }

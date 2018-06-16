@@ -5,6 +5,8 @@ import com.gaurav.restify.configuration.RestConfigurationManager;
 import com.gaurav.restify.constants.ConfigurationConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -17,6 +19,10 @@ import java.nio.file.Files;
 public class ConfigurationListener {
 
     Logger logger = LoggerFactory.getLogger(ConfigurationUtil.class);
+
+    @Autowired
+    private static ApplicationContext appContext;
+
 
 
     @EventListener(ContextRefreshedEvent.class)
@@ -34,7 +40,7 @@ public class ConfigurationListener {
             Files.createDirectories(ConfigurationConstants.REST_CONFIG_PATH);
         } catch (IOException e) {
             logger.error("Could not create directories", e);
-            System.exit(0);
+            System.exit(2);
 
         }
     }

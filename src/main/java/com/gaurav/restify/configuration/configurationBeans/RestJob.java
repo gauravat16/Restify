@@ -2,6 +2,7 @@ package com.gaurav.restify.configuration.configurationBeans;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.Arrays;
 
 @XmlRootElement(name = "RestJob")
 
@@ -52,5 +53,16 @@ public class RestJob {
 
     public void setWaitTime(long waitTime) {
         this.waitTime = waitTime;
+    }
+
+    @Override
+    public String toString() {
+        return "RestJob{" +
+                "path='" + path + '\'' +
+                ", commandType='" + commandType + '\'' +
+                ", command='" + command + '\'' +
+                ", args=" + Arrays.toString(args) +
+                ", waitTime=" + waitTime +
+                '}';
     }
 }

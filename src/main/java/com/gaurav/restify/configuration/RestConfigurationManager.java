@@ -12,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.util.HashMap;
 
 import static com.gaurav.restify.constants.ConfigurationConstants.REST_CONFIG_FILE;
+import static com.gaurav.restify.constants.ErrorCodes.ERROR_TERMINATE;
 
 @Component
 public class RestConfigurationManager {
@@ -21,6 +22,7 @@ public class RestConfigurationManager {
     private static RestConfiguration restConfiguration = null;
     private static HashMap<String, RestJob> restJobHashMap = null;
     private static final Logger logger = LoggerFactory.getLogger(RestConfigurationManager.class);
+
 
     private RestConfigurationManager() {
 
@@ -38,13 +40,13 @@ public class RestConfigurationManager {
 
             } catch (JAXBException e) {
 
-                logger.error( "Could not parse xml file - " + REST_CONFIG_FILE, e);
-                System.exit(0);
+                logger.error("Could not parse xml file - " + REST_CONFIG_FILE, e);
+                System.exit(ERROR_TERMINATE);
+
 
             } catch (FileNotFoundException e) {
                 logger.error("xml file not found- " + REST_CONFIG_FILE, e);
-                System.exit(0);
-
+                System.exit(ERROR_TERMINATE);
 
             }
 
@@ -56,7 +58,7 @@ public class RestConfigurationManager {
 
 
     private static void instantiateRestJobMap() {
-        logger.info( "Going to instantiate rest job map");
+        logger.info("Going to instantiate rest job map");
         if (null != restConfiguration) {
             restJobHashMap = new HashMap<>();
             restConfiguration.getJobs().forEach(job -> restJobHashMap.put(job.getCommand(), job));
@@ -68,6 +70,17 @@ public class RestConfigurationManager {
 
     public RestJob getRestJob(String commandName) {
         return restJobHashMap.get(commandName);
+    }
+
+
+    public void refreshConfiguration(){
+        logger.info("Going to refresh rest job map");
+
+        restConfigurationManager = null;
+
+        RestConfigurationManager.getInstance();
+
+
     }
 
 
