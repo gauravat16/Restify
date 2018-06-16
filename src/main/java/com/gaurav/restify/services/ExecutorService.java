@@ -37,9 +37,12 @@ public class ExecutorService {
     public CommandLine getCommandLine(ExecutorTask executorTask) {
         CommandLine commandLine = new CommandLine(executorTask.getCommandType().toString());
         commandLine.addArgument(executorTask.getCommand());
-        for (String arg : executorTask.getArgs()) {
+        if (null != executorTask.getArgs()) {
+            for (String arg : executorTask.getArgs()) {
 
-            commandLine.addArgument(arg);
+                commandLine.addArgument(arg);
+
+            }
 
         }
 

@@ -3,6 +3,8 @@ package com.gaurav.restify.controllers;
 import com.gaurav.restify.beans.ExecutorTask;
 import com.gaurav.restify.beans.ExecutorTaskOutput;
 import com.gaurav.restify.beans.Response;
+import com.gaurav.restify.configuration.RestConfigurationManager;
+import com.gaurav.restify.configuration.configurationBeans.RestJob;
 import com.gaurav.restify.constants.ExecutorConstants;
 import com.gaurav.restify.services.ExecutorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,17 +23,23 @@ public class ProcessController {
     @Autowired
     private ExecutorService executorService;
 
+    @Autowired
+    private RestConfigurationManager restConfigurationManager;
+
 
     @RequestMapping(value = "/execute/{scriptName}")
     public Response executeScripts(@PathVariable String scriptName) {
+
+        RestJob restJob = restConfigurationManager.getRestJob(scriptName);
+
 
         ExecutorTaskOutput taskOutput = null;
         try {
 
 
-            ExecutorTask executorTask = new ExecutorTask.ExecutorTaskBuilder("/Users/gaurav/Downloads", scriptName, ExecutorConstants.BASH)
-                    .setArgs(new String[]{})
-                    .setWaitTime(10)
+            ExecutorTask executorTask = new ExecutorTask.ExecutorTaskBuilder(restJob.getPath(), restJob.getCommand(), ExecutorConstants.valueOf(restJob.getCommandType()))
+                    .setArgs(restJob.getArgs())
+                    .setWaitTime(restJob.getWaitTime())
                     .build();
 
 
