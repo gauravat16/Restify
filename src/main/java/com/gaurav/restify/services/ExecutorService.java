@@ -2,12 +2,12 @@ package com.gaurav.restify.services;
 
 import com.gaurav.restify.beans.ExecutorTask;
 import com.gaurav.restify.beans.ExecutorTaskOutput;
-import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.exec.PumpStreamHandler;
 import org.springframework.stereotype.Service;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 
@@ -15,7 +15,7 @@ import java.io.IOException;
 public class ExecutorService {
 
     public ExecutorTaskOutput executeTask(ExecutorTask executorTask) throws IOException {
-        ByteOutputStream byteOutputStream = new ByteOutputStream();
+        ByteArrayOutputStream byteOutputStream = new ByteArrayOutputStream();
 
         PumpStreamHandler pumpStreamHandler = new PumpStreamHandler(byteOutputStream);
         CommandLine cmdLine = getCommandLine(executorTask);
