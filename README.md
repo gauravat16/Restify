@@ -1,4 +1,7 @@
 # Restify
+
+[![Build Status](https://travis-ci.org/gauravat16/Restify.svg?branch=master)](https://travis-ci.org/gauravat16/Restify)
+
 Make any program/script a rest service!
 
 This project is under development. Please feel free to fork and contribute! 😀
