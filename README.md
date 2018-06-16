@@ -14,7 +14,9 @@ When you first run the application following folder structure should be created.
 * /usr/local/var/Restify/Logs
 * /usr/local/var/Restify/Configuration
 
-##### Create a configuration file in /usr/local/var/Restify/Configuration.
+#### Configuration
+Create a configuration file in /usr/local/var/Restify/Configuration.
+
 **Name - Restify_Rest_Jobs.xml**
 
 **Content of the XML -** 
@@ -40,7 +42,7 @@ When you first run the application following folder structure should be created.
         </ns2:restConfiguration>
 
 
-##### Executing the script
+#### Executing the script
 
 * curl http://localhost:8080/execute/script-name 
 * example - curl http://localhost:8080/execute/Testscript.sh
@@ -49,10 +51,16 @@ When you first run the application following folder structure should be created.
     **{"processExecCode":"0","output":"Hello!\n"}**
 
 
-##### Refreshing configuration after adding a new rest job
+#### Refreshing configuration after adding a new rest job
 
 * To refresh configuration without restarting the app,
 * hit - curl http://localhost:8080/refresh 
 * Output - **{"processExecCode":"0","output":"Configuration Refreshed"}**
+
+#### Scripts supported
+* Java
+* Python
+* Shell
+
 
 
