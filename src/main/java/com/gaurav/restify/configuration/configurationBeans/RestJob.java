@@ -10,6 +10,7 @@ import java.util.Arrays;
 public class RestJob {
 
     private String path;
+    private String alias;
     private String commandType;
     private String command;
     private String[] args;
@@ -55,10 +56,19 @@ public class RestJob {
         this.waitTime = waitTime;
     }
 
+    public String getAlias() {
+        return alias;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
+    }
+
     @Override
     public String toString() {
         return "RestJob{" +
                 "path='" + path + '\'' +
+                ", alias='" + alias + '\'' +
                 ", commandType='" + commandType + '\'' +
                 ", command='" + command + '\'' +
                 ", args=" + Arrays.toString(args) +

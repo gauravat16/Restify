@@ -61,7 +61,7 @@ public class RestConfigurationManager {
         logger.info("Going to instantiate rest job map");
         if (null != restConfiguration) {
             restJobHashMap = new HashMap<>();
-            restConfiguration.getJobs().forEach(job -> restJobHashMap.put(job.getCommand(), job));
+            restConfiguration.getJobs().forEach(job -> restJobHashMap.put(job.getAlias(), job));
         } else {
             logger.debug("restConfiguration is null");
 
