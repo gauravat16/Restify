@@ -64,5 +64,11 @@ Create a configuration file in /usr/local/var/Restify/Configuration.
 * Python
 * Shell
 
+#### Executing Restify
+ * Download latest version from the releases page.
+ * java -Dserver.port=**port** -jar build/libs/restify-**version-number**.jar 
+ 
+ eg - java -Dserver.port=9090 -jar build/libs/restify-1.0.jar 
+
 
 
