@@ -30,6 +30,8 @@ public class ProcessController {
 
     @RequestMapping(value = "/execute/{scriptName}")
     public Response executeScripts(@PathVariable String scriptName) {
+        Response response;
+
 
         logger.info("Current Rest Call for Script ::: " + scriptName);
 
@@ -37,13 +39,26 @@ public class ProcessController {
 
         logger.info("Rest Job Found " + restJob);
 
+        if (null == restJob) {
+            response = new Response(String.valueOf(ErrorCodes.ERROR_TERMINATE));
+            response.setOutput("No Rest Job found for the alias " + scriptName);
+            return response;
+        }
+
 
         ExecutorTaskOutput taskOutput;
-        Response response;
+        ExecutorConstants commandType = null;
+        try {
+            commandType = ExecutorConstants.valueOf(restJob.getCommandType());
+
+        } catch (IllegalArgumentException e) {
+            logger.error("ExecutorConstants not present for job's command type");
+        }
+
         try {
 
 
-            ExecutorTask executorTask = new ExecutorTask.ExecutorTaskBuilder(restJob.getPath(), restJob.getCommand(), ExecutorConstants.valueOf(restJob.getCommandType()))
+            ExecutorTask executorTask = new ExecutorTask.ExecutorTaskBuilder(restJob.getPath(), restJob.getCommand(), commandType, restJob.getAlias())
                     .setArgs(restJob.getArgs())
                     .setWaitTime(restJob.getWaitTime())
                     .build();

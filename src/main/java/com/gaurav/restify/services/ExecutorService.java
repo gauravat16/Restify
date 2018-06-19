@@ -2,9 +2,11 @@ package com.gaurav.restify.services;
 
 import com.gaurav.restify.beans.ExecutorTask;
 import com.gaurav.restify.beans.ExecutorTaskOutput;
+import com.gaurav.restify.configuration.RestConfigurationManager;
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.exec.PumpStreamHandler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayOutputStream;
@@ -13,6 +15,9 @@ import java.io.IOException;
 
 @Service
 public class ExecutorService {
+
+    @Autowired
+    private RestConfigurationManager restConfigurationManager;
 
     public ExecutorTaskOutput executeTask(ExecutorTask executorTask) throws IOException {
         ByteArrayOutputStream byteOutputStream = new ByteArrayOutputStream();
@@ -35,7 +40,15 @@ public class ExecutorService {
     }
 
     public CommandLine getCommandLine(ExecutorTask executorTask) {
-        CommandLine commandLine = new CommandLine(executorTask.getCommandType().toString());
+
+        String commandType;
+        if (null == executorTask.getCommandType()) {
+            commandType = restConfigurationManager.getRestJob(executorTask.getAlias()).getCommandType();
+        } else {
+            commandType = executorTask.getCommandType().toString();
+        }
+
+        CommandLine commandLine = new CommandLine(commandType);
         commandLine.addArgument(executorTask.getCommand());
         if (null != executorTask.getArgs()) {
             for (String arg : executorTask.getArgs()) {

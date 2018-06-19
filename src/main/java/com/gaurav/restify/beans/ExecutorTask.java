@@ -6,6 +6,7 @@ public class ExecutorTask {
     private String path;
     private ExecutorConstants commandType;
     private String command;
+    private String alias;
     private String[] args;
     private long waitTime;
 
@@ -16,6 +17,7 @@ public class ExecutorTask {
         this.args = executorTaskBuilder.args;
         this.waitTime = executorTaskBuilder.waitTime;
         this.commandType = executorTaskBuilder.commandType;
+        this.alias = executorTaskBuilder.alias;
     }
 
 
@@ -35,6 +37,10 @@ public class ExecutorTask {
         return waitTime;
     }
 
+    public String getAlias() {
+        return alias;
+    }
+
     public ExecutorConstants getCommandType() {
         return commandType;
     }
@@ -42,16 +48,18 @@ public class ExecutorTask {
     public static class ExecutorTaskBuilder {
 
         private String path;
+        private String alias;
         private String command;
         private String[] args;
         private long waitTime;
         private ExecutorConstants commandType;
 
 
-        public ExecutorTaskBuilder(String path, String command, ExecutorConstants commandType) {
+        public ExecutorTaskBuilder(String path, String command, ExecutorConstants commandType, String alias) {
             this.path = path;
             this.command = command;
             this.commandType = commandType;
+            this.alias = alias;
         }
 
         public ExecutorTaskBuilder setPath(String path) {
@@ -80,6 +88,14 @@ public class ExecutorTask {
         public ExecutorTaskBuilder setCommandType(ExecutorConstants commandType) {
             this.commandType = commandType;
             return this;
+        }
+
+        public String getAlias() {
+            return alias;
+        }
+
+        public void setAlias(String alias) {
+            this.alias = alias;
         }
 
         public ExecutorTask build() {

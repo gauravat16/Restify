@@ -3,7 +3,8 @@ package com.gaurav.restify.constants;
 public enum ExecutorConstants {
     BASH("sh"),
     PYTHON("python"),
-    JAVA("java");
+    JAVA("java"),
+    BATCH("");
 
     private String shellName;
 

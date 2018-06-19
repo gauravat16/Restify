@@ -3,6 +3,7 @@ package com.gaurav.restify.bootstrap;
 import com.gaurav.restify.configuration.ConfigurationUtil;
 import com.gaurav.restify.configuration.RestConfigurationManager;
 import com.gaurav.restify.constants.ConfigurationConstants;
+import com.gaurav.restify.constants.ErrorCodes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +25,13 @@ public class ConfigurationListener {
     private static ApplicationContext appContext;
 
 
-
     @EventListener(ContextRefreshedEvent.class)
     private void instantiateConfiguration() {
+        createDirectories();
         logger.info("Startup Listener :: Configuration");
         RestConfigurationManager.getInstance();
     }
 
-    @EventListener(ContextRefreshedEvent.class)
     private void createDirectories() {
         logger.info("Startup Listener :: Directories");
 
@@ -40,7 +40,7 @@ public class ConfigurationListener {
             Files.createDirectories(ConfigurationConstants.REST_CONFIG_PATH);
         } catch (IOException e) {
             logger.error("Could not create directories", e);
-            System.exit(2);
+            System.exit(ErrorCodes.ERROR_TERMINATE);
 
         }
     }
