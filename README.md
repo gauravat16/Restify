@@ -63,6 +63,7 @@ Create a configuration file in /usr/local/var/Restify/Configuration.
 * Java
 * Python
 * Shell
+* Custom - provide executor program name in <commandType></commandType> ex - sh for Bash or gcc for C/CPP
 
 #### Executing Restify
  * Download latest version from the releases page.
