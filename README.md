@@ -26,8 +26,8 @@ Create a configuration file in /usr/local/var/Restify/Configuration.
             <restJobs>
                 <restJob>
                     <alias>bashTest</alias>
-                    <args>val1<args>
-                    <args>val2<args>
+                    <args>val1</args>
+                    <args>val2</args>
                     <command>Testscript.sh</command>
                     <commandType>BASH</commandType>
                     <path>/Users/gaurav/Downloads</path>
