@@ -1,5 +1,6 @@
 package com.gaurav.restify.configuration.configurationBeans;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import java.util.Arrays;
@@ -13,7 +14,10 @@ public class RestJob {
     private String alias;
     private String commandType;
     private String command;
-    private String[] args;
+    @XmlElement(name = "args-command")
+    private String[] argsCommand;
+    @XmlElement(name = "args-command-type")
+    private String[] argsCommandType;
     private long waitTime;
 
     public String getPath() {
@@ -40,14 +44,6 @@ public class RestJob {
         this.command = command;
     }
 
-    public String[] getArgs() {
-        return args;
-    }
-
-    public void setArgs(String[] args) {
-        this.args = args;
-    }
-
     public long getWaitTime() {
         return waitTime;
     }
@@ -64,6 +60,23 @@ public class RestJob {
         this.alias = alias;
     }
 
+
+    public String[] getArgsForCommand() {
+        return argsCommand;
+    }
+
+    public void setArgsCommand(String[] argsCommand) {
+        this.argsCommand = argsCommand;
+    }
+
+    public String[] getArgsForCommandType() {
+        return argsCommandType;
+    }
+
+    public void setArgsCommandType(String[] argsCommandType) {
+        this.argsCommandType = argsCommandType;
+    }
+
     @Override
     public String toString() {
         return "RestJob{" +
@@ -71,7 +84,8 @@ public class RestJob {
                 ", alias='" + alias + '\'' +
                 ", commandType='" + commandType + '\'' +
                 ", command='" + command + '\'' +
-                ", args=" + Arrays.toString(args) +
+                ", argsCommand=" + Arrays.toString(argsCommand) +
+                ", argsCommandType=" + Arrays.toString(argsCommandType) +
                 ", waitTime=" + waitTime +
                 '}';
     }

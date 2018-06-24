@@ -25,7 +25,6 @@
 .idea/**/libraries
 .gradle
 
-
 # CMake
 cmake-build-debug/
 cmake-build-release/

@@ -7,7 +7,7 @@ import com.gaurav.restify.configuration.RestConfigurationManager;
 import com.gaurav.restify.configuration.configurationBeans.RestJob;
 import com.gaurav.restify.constants.ErrorCodes;
 import com.gaurav.restify.constants.ExecutorConstants;
-import com.gaurav.restify.services.ExecutorService;
+import com.gaurav.restify.services.executor.ExecutorService;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -59,7 +59,8 @@ public class ProcessController {
 
 
             ExecutorTask executorTask = new ExecutorTask.ExecutorTaskBuilder(restJob.getPath(), restJob.getCommand(), commandType, restJob.getAlias())
-                    .setArgs(restJob.getArgs())
+                    .setArgsCommand(restJob.getArgsForCommand())
+                    .setArgsCommandType(restJob.getArgsForCommandType())
                     .setWaitTime(restJob.getWaitTime())
                     .build();
 

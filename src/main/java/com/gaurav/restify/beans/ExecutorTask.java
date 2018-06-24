@@ -2,19 +2,22 @@ package com.gaurav.restify.beans;
 
 import com.gaurav.restify.constants.ExecutorConstants;
 
+
 public class ExecutorTask {
     private String path;
     private ExecutorConstants commandType;
     private String command;
     private String alias;
-    private String[] args;
+    private String[] argsCommand;
+    private String[] argsCommandType;
     private long waitTime;
 
     private ExecutorTask(ExecutorTaskBuilder executorTaskBuilder) {
 
         this.path = executorTaskBuilder.path;
         this.command = executorTaskBuilder.command;
-        this.args = executorTaskBuilder.args;
+        this.argsCommand = executorTaskBuilder.argsCommand;
+        this.argsCommandType = executorTaskBuilder.argsCommandType;
         this.waitTime = executorTaskBuilder.waitTime;
         this.commandType = executorTaskBuilder.commandType;
         this.alias = executorTaskBuilder.alias;
@@ -29,8 +32,12 @@ public class ExecutorTask {
         return command;
     }
 
-    public String[] getArgs() {
-        return args;
+    public String[] getArgsCommand() {
+        return argsCommand;
+    }
+
+    public String[] getArgsCommandType() {
+        return argsCommandType;
     }
 
     public long getWaitTime() {
@@ -50,7 +57,8 @@ public class ExecutorTask {
         private String path;
         private String alias;
         private String command;
-        private String[] args;
+        private String[] argsCommand;
+        private String[] argsCommandType;
         private long waitTime;
         private ExecutorConstants commandType;
 
@@ -73,8 +81,14 @@ public class ExecutorTask {
 
         }
 
-        public ExecutorTaskBuilder setArgs(String[] args) {
-            this.args = args;
+        public ExecutorTaskBuilder setArgsCommand(String[] argsCommand) {
+            this.argsCommand = argsCommand;
+            return this;
+
+        }
+
+        public ExecutorTaskBuilder setArgsCommandType(String[] argsCommandType) {
+            this.argsCommandType = argsCommandType;
             return this;
 
         }

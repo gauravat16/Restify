@@ -1,9 +1,15 @@
 package com.gaurav.restify.configuration;
 
+import com.gaurav.restify.configuration.configurationBeans.RestConfiguration;
+import com.gaurav.restify.configuration.configurationBeans.RestJob;
+import com.gaurav.restify.constants.ConfigurationConstants;
+
 import javax.xml.bind.*;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 
 
 public class ConfigurationUtil {
@@ -24,6 +30,32 @@ public class ConfigurationUtil {
         Unmarshaller um = context.createUnmarshaller();
         return um.unmarshal(new FileReader(path.toFile().getAbsolutePath()));
 
+    }
+
+
+    //Test Function
+    public static void main(String[] args) {
+        RestJob restJob = new RestJob();
+
+        restJob.setAlias("testJob");
+        restJob.setCommand("TestScript.sh");
+        restJob.setCommandType("BASH");
+        restJob.setPath("/Users/gaurav/Downloads");
+        restJob.setWaitTime(20);
+        restJob.setArgsCommand(new String[]{"dataForScript"});
+        restJob.setArgsCommandType(new String[]{"-c", "root"});
+
+
+        RestConfiguration restConfiguration = new RestConfiguration();
+        ArrayList<RestJob> restJobs = new ArrayList<>();
+        restJobs.add(restJob);
+        restConfiguration.setRestJobs(restJobs);
+        try {
+            objectToXML(RestConfiguration.class, restConfiguration, Paths.get("/usr/local/var/Restify/Configuration/testCOnf.xml"));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
