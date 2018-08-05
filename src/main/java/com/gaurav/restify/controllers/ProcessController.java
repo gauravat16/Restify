@@ -3,10 +3,12 @@ package com.gaurav.restify.controllers;
 import com.gaurav.restify.beans.ExecutorTask;
 import com.gaurav.restify.beans.ExecutorTaskOutput;
 import com.gaurav.restify.beans.Response;
+import com.gaurav.restify.beans.dbpostbeans.RestJobPostBean;
 import com.gaurav.restify.configuration.RestConfigurationManager;
 import com.gaurav.restify.configuration.configurationBeans.RestJob;
 import com.gaurav.restify.constants.ErrorCodes;
 import com.gaurav.restify.constants.ExecutorConstants;
+import com.gaurav.restify.services.database.DatabaseService;
 import com.gaurav.restify.services.executor.ExecutorService;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +27,13 @@ public class ProcessController {
     @Autowired
     private RestConfigurationManager restConfigurationManager;
 
+    @Autowired
+    private DatabaseService databaseService;
+
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(ProcessController.class);
 
 
-    @RequestMapping(value = "/execute/{scriptName}")
+    @RequestMapping(value = "/restify/execute/{scriptName}")
     public Response executeScripts(@PathVariable String scriptName) {
         Response response;
 
@@ -70,6 +75,10 @@ public class ProcessController {
             response.setOutput(taskOutput.getOutput());
 
 
+
+
+
+
         } catch (IOException ioEx) {
 
             logger.error("File Not Found", ioEx);
@@ -83,6 +92,11 @@ public class ProcessController {
             response.setOutput(e.toString());
 
         }
+
+        RestJobPostBean restJobPostBean = new RestJobPostBean(response);
+        restJobPostBean.setRestJob(restJob);
+
+        databaseService.addJob(restJobPostBean);
 
 
         return response;

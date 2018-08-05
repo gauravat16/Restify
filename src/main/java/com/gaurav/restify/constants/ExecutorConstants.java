@@ -4,7 +4,7 @@ public enum ExecutorConstants {
     BASH("sh"),
     PYTHON("python"),
     JAVA("java"),
-    BATCH(""),
+    BATCH("cmd"),
     EXEC("./");
 
     private String shellName;
