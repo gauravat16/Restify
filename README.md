@@ -66,8 +66,8 @@ Create a configuration file in _/usr/local/var/Restify/Configuration_.
 
 ## Executing the script
 
-* curl http://localhost:8080/execute/alias 
-* example - curl http://localhost:8080/execute/bashTest
+* curl http://localhost:8080/restify/execute/alias 
+* example - curl http://localhost:8080/restify/execute/bashTest
 [You can also hit the URL in a browser]
 * output - 
     **{"processExecCode":"0","output":"Hello!\n"}**
