@@ -12,7 +12,7 @@ public class RefreshConfiguration {
     @Autowired
     RestConfigurationManager restConfigurationManager;
 
-    @RequestMapping(value = "/refresh")
+    @RequestMapping(value = "/restify/refresh")
     public Response refreshConfiguration(){
 
         restConfigurationManager.refreshConfiguration();
