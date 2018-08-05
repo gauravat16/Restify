@@ -76,7 +76,7 @@ Create a configuration file in _/usr/local/var/Restify/Configuration_.
 ## Refreshing configuration after adding a new rest job
 
 * To refresh configuration without restarting the app,
-* hit - curl http://localhost:8080/refresh 
+* hit - curl http://localhost:8080/restify/refresh 
 * Output - **{"processExecCode":"0","output":"Configuration Refreshed"}**
 
 ## Scripts supported
