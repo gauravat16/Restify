@@ -5,6 +5,8 @@ import com.gaurav.restify.repositories.RestJobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DatabaseService {
 
@@ -13,6 +15,10 @@ public class DatabaseService {
 
     public void addJob(RestJobPostBean restJobPostBean) {
         restJobRepository.save(restJobPostBean);
+    }
+
+    public List<RestJobPostBean> getRestPostHistory(String alias) {
+        return restJobRepository.findByAlias(alias);
     }
 
 

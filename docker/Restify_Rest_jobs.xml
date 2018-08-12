@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:restConfiguration xmlns:ns2="com.gaurav.restify.configuration">
+    <restJobs>
+        <restJob>
+            <args-command>dataForScript</args-command>
+            <args-command-type>-x</args-command-type>
+            <alias>testJob</alias>
+
+		<command>TestScript.sh</command>
+            <commandType>bash</commandType>
+            <path>/Users/gaurav/Downloads/</path>
+            <waitTime>20</waitTime>
+        </restJob>
+    </restJobs>
+</ns2:restConfiguration>
