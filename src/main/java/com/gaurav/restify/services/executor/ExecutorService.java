@@ -25,8 +25,6 @@ public class ExecutorService {
     @Autowired
     private RestConfigurationManager restConfigurationManager;
 
-    private Map<String, IExecutorCommands> commandLineLambdaMap = new HashMap<>();
-
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(ExecutorService.class);
 
 
@@ -60,12 +58,16 @@ public class ExecutorService {
         }
 
         CommandLine commandLine = new CommandLine(commandType);
-        Arrays.stream(executorTask.getArgsCommandType()).forEach(commandLine::addArgument);
+
+        if (executorTask.getArgsCommandType() != null)
+            Arrays.stream(executorTask.getArgsCommandType()).forEach(commandLine::addArgument);
 
         commandLine.addArgument(executorTask.getCommand());
-        Arrays.stream(executorTask.getArgsCommand()).forEach(commandLine::addArgument);
 
-        logger.info("Command Line :: "+ commandLine.toString());
+        if (executorTask.getArgsCommand() != null)
+            Arrays.stream(executorTask.getArgsCommand()).forEach(commandLine::addArgument);
+
+        logger.info("Command Line :: " + commandLine.toString());
 
         return commandLine;
     }

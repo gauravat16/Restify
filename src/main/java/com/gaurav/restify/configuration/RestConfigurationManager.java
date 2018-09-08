@@ -72,8 +72,12 @@ public class RestConfigurationManager {
         return restJobHashMap.get(commandName);
     }
 
+    public void addRestJob(RestJob restJob) {
+        restJobHashMap.put(restJob.getAlias(), restJob);
+    }
 
-    public void refreshConfiguration(){
+
+    public void refreshConfiguration() {
         logger.info("Going to refresh rest job map");
 
         restConfigurationManager = null;
