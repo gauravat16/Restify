@@ -138,13 +138,16 @@ When you first run the application following folder structure should be created.
   * Shell
   * Custom - provide executor program name in <commandType></commandType> ex - sh for Bash or gcc for C/CPP
 
-## Downloading Restify
-You can either  - 
-* Go to releases and get the latets release jar.
-* Clone the project and run ./gradlew build bootJar
+
 
 ## Executing Restify
- * Download latest version from the releases page.
+ **Natively -** 
+ * Clone the project and run ./gradlew build bootJar
  * java -Dserver.port=**port** -jar build/libs/restify-**version-number**.jar 
-
  eg - java -Dserver.port=9090 -jar build/libs/restify-1.0.jar 
+ 
+ **Docker -** 
+  * Clone the project and run ./gradlew copyJarForDocker
+  * cd ../Restify/
+  * docker-compose up
+
