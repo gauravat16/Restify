@@ -150,4 +150,5 @@ When you first run the application following folder structure should be created.
   * Clone the project and run ./gradlew copyJarForDocker
   * cd ../Restify/
   * docker-compose up
+  * http://localhost:9091/restify/get/execute/alias
 
