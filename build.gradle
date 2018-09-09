@@ -15,7 +15,7 @@ apply plugin: 'io.spring.dependency-management'
 
 
 group 'com.gaurav.restify'
-version '1.0'
+version '1.2'
 
 sourceCompatibility = 1.8
 
@@ -25,6 +25,13 @@ repositories {
 
 bootJar {
     mainClassName = 'com.gaurav.restify.SpringApp'
+}
+
+task copyJarForDocker(type: Copy){
+
+        from bootJar
+        into "docker/springApp"
+
 }
 
 
