@@ -41,12 +41,9 @@ public class RestConfigurationManager {
             } catch (JAXBException e) {
 
                 logger.error("Could not parse xml file - " + REST_CONFIG_FILE, e);
-                System.exit(ERROR_TERMINATE);
-
 
             } catch (FileNotFoundException e) {
                 logger.error("xml file not found- " + REST_CONFIG_FILE, e);
-                System.exit(ERROR_TERMINATE);
 
             }
 
