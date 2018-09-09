@@ -36,7 +36,7 @@ When you first run the application following folder structure should be created.
 
   ```json
   {
-  	"path": "/Users/gaurav/Downloads/",
+      "path": "/Users/gaurav/Downloads/",
       "alias":"testPost",
       "commandType":"sh",
       "command":"TestScript.sh",
