@@ -1,4 +1,4 @@
-# Restify [![Build Status](https://travis-ci.org/gauravat16/Restify.svg?branch=master)](https://travis-ci.org/gauravat16/Restify)
+# rest-lambda [![Build Status](https://travis-ci.org/gauravat16/Restify.svg?branch=master)](https://travis-ci.org/gauravat16/Restify)
 
 Make any program/script a rest service!
 
@@ -9,8 +9,8 @@ This project is under development. Please feel free to fork and contribute! 😀
 
 When you first run the application following folder structure should be created. 
 
-* /usr/local/var/Restify/Logs
-* /usr/local/var/Restify/Configuration
+* /usr/local/var/rest-lambda/Logs
+* /usr/local/var/rest-lambda/Configuration
 
 ## Two ways to execute jobs
 
@@ -19,7 +19,7 @@ When you first run the application following folder structure should be created.
 
 * ### Method 1 (JSON Request)
 
-  URL Path - http://localhost:8080/restify/post/execute
+  URL Path - http://localhost:8080/lambda/post/execute
 
   * path - Path to the script/program
 
@@ -48,7 +48,7 @@ When you first run the application following folder structure should be created.
   Test it by this command - 
 
   ```bash
-  curl --header "Content-Type: application/json" --request POST  --data '{"path": "/Users/gaurav/Downloads/", "alias":"testPost", "commandType":"sh", "command":"TestScript.sh", "waitTime": "32"}' http://localhost:8080/restify/post/execute
+  curl --header "Content-Type: application/json" --request POST  --data '{"path": "/Users/gaurav/Downloads/", "alias":"testPost", "commandType":"sh", "command":"TestScript.sh", "waitTime": "32"}' http://localhost:8080/lambda/post/execute
   
   ```
 
@@ -64,7 +64,7 @@ When you first run the application following folder structure should be created.
 
   ```xml
        <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-      <ns2:restConfiguration xmlns:ns2="com.gaurav.restify.configuration">
+      <ns2:restConfiguration xmlns:ns2="com.gaurav.rest.lambda.configuration">
           <restJobs>
           <!--Rest Job with custom command type-->
               <restJob>
@@ -108,9 +108,9 @@ When you first run the application following folder structure should be created.
 
   ## Executing the script
 
-  * curl http://localhost:8080/restify/get/execute/alias 
+  * curl http://localhost:8080/lambda/get/execute/alias 
 
-  * example - curl http://localhost:8080/restify/get/execute/bashTest
+  * example - curl http://localhost:8080/lambda/get/execute/bashTest
     [You can also hit the URL in a browser]
 
   * output - 
@@ -122,7 +122,7 @@ When you first run the application following folder structure should be created.
       ### Refreshing configuration after adding a new rest job
       * To refresh configuration without restarting the app,
 
-      * hit - curl http://localhost:8080/restify/refresh 
+      * hit - curl http://localhost:8080/lambda/refresh 
 
       * Output -
 
@@ -143,12 +143,12 @@ When you first run the application following folder structure should be created.
 ## Executing Restify
  **Natively -** 
  * Clone the project and run ./gradlew build bootJar
- * java -Dserver.port=**port** -jar build/libs/restify-**version-number**.jar 
- eg - java -Dserver.port=9090 -jar build/libs/restify-1.0.jar 
+ * java -Dserver.port=**port** -jar build/libs/rest-lambda-**version-number**.jar 
+ eg - java -Dserver.port=9090 -jar build/libs/rest-lambda-1.0.jar 
  
  **Docker -** 
   * Clone the project and run ./gradlew copyJarForDocker
-  * cd ../Restify/
+  * cd ../rest-lambda/
   * docker-compose up
   * http://localhost:9091/restify/get/execute/alias
 
