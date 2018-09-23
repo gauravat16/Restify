@@ -18,7 +18,7 @@ public class RestConfigurationManager {
 
     private static RestConfigurationManager restConfigurationManager = null;
     private static RestConfiguration restConfiguration = null;
-    private static HashMap<String, RestJob> restJobHashMap = null;
+    private static HashMap<String, RestJob> restJobHashMap = new HashMap<>();
     private static final Logger logger = LoggerFactory.getLogger(RestConfigurationManager.class);
 
 
@@ -53,12 +53,11 @@ public class RestConfigurationManager {
 
 
     private static void instantiateRestJobMap() {
-        logger.info("Going to instantiate rest job map");
-        if (null != restConfiguration) {
-            restJobHashMap = new HashMap<>();
-            restConfiguration.getJobs().forEach(job -> restJobHashMap.put(job.getAlias(), job));
-        } else {
-            logger.debug("restConfiguration is null");
+		logger.info("Going to instantiate rest job map");
+		if (null != restConfiguration) {
+			restConfiguration.getJobs().forEach(job -> restJobHashMap.put(job.getAlias(), job));
+		} else {
+			logger.debug("restConfiguration is null");
 
         }
     }
@@ -68,6 +67,7 @@ public class RestConfigurationManager {
     }
 
     public void addRestJob(RestJob restJob) {
+    	
         restJobHashMap.put(restJob.getAlias(), restJob);
     }
 
