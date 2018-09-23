@@ -56,9 +56,9 @@ When you first run the application following folder structure should be created.
 
   ## Create the configuration
 
-  Create a configuration file in _/usr/local/var/Restify/Configuration_.
+  Create a configuration file in _/usr/local/var/rest-lambda/Configuration_.
 
-  **Name - Restify_Rest_Jobs.xml**
+  **Name - rest_lambda_jobs.xml**
 
   **Content of the XML -** 
 
@@ -140,7 +140,7 @@ When you first run the application following folder structure should be created.
 
 
 
-## Executing Restify
+## Executing rest-lambda
  **Natively -** 
  * Clone the project and run ./gradlew build bootJar
  * java -Dserver.port=**port** -jar build/libs/rest-lambda-**version-number**.jar 
@@ -150,5 +150,5 @@ When you first run the application following folder structure should be created.
   * Clone the project and run ./gradlew copyJarForDocker
   * cd ../rest-lambda/
   * docker-compose up
-  * http://localhost:9091/restify/get/execute/alias
+  * http://localhost:9091/lambda/get/execute/alias
 
