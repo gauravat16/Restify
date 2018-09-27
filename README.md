@@ -1,4 +1,4 @@
-# rest-lambda [![Build Status](https://travis-ci.org/gauravat16/Restify.svg?branch=master)](https://travis-ci.org/gauravat16/Restify)
+# rest-lambda [![Build Status](https://travis-ci.org/gauravat16/rest-lambda.svg?branch=master)](https://travis-ci.org/gauravat16/rest-lambda)
 
 Make any program/script a rest service!
 
