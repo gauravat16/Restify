@@ -12,6 +12,12 @@ When you first run the application following folder structure should be created.
 * /usr/local/var/rest-lambda/Logs
 * /usr/local/var/rest-lambda/Configuration
 
+## Setup security
+
+Set user.user1, password.user1 in application.properties.
+
+& Use vm option ```-Dspring.profiles.active=SecurityOn``` 
+
 ## Two ways to execute jobs
 
 * Send **JSON** request to execute a job (POST)
