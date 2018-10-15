@@ -11,11 +11,9 @@ import com.gaurav.rest.lambda.configuration.RestConfigurationManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -30,9 +28,6 @@ public class ConfigurationListener {
     @Autowired
     private static ApplicationContext appContext;
 
-    @Value("${password.user1}")
-    private String password;
-
 
     @EventListener(ContextRefreshedEvent.class)
     private void instantiateConfiguration() {
@@ -43,9 +38,6 @@ public class ConfigurationListener {
 
     private void createDirectories() {
         logger.info("Startup Listener :: Directories");
-        logger.info("CURRENT PASS - "  + password);
-
-        logger.info("CURRENT PASS - "  + new BCryptPasswordEncoder().encode(password));
 
         try {
             Files.createDirectories(ConfigurationConstants.REST_LOG_PATH);
