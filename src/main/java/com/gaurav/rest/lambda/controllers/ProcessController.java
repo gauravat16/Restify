@@ -126,6 +126,8 @@ public class ProcessController {
 
         databaseService.addJob(restJobPostBean);
 
+        logger.info("Response for  " + restJob.getAlias() + "=====>" + response);
+
         return response;
 
     }

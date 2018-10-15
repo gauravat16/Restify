@@ -49,4 +49,13 @@ public class RestJobPostBean extends RestJob {
 
 
     }
+
+
+    @Override
+    public String toString() {
+        return "RestJobPostBean{" +
+                "response=" + response +
+                ", timeStamp='" + timeStamp + '\'' +
+                '}';
+    }
 }
