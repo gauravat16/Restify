@@ -4,9 +4,12 @@
 
 package com.gaurav.rest.lambda.constants;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
 
 public interface ConfigurationConstants {
 
@@ -19,4 +22,14 @@ public interface ConfigurationConstants {
     Path REST_LOG_PATH = Paths.get(DEFAULT_LOG_DIR_PATH_LINUX);
     Path REST_CONFIG_PATH = Paths.get(DEFAULT_CONFIG_DIR_PATH_LINUX);
 
+    /**
+     * Security constants
+     */
+
+    String ROLE_1 = "USER1";
+
+
 }
+
+
+
