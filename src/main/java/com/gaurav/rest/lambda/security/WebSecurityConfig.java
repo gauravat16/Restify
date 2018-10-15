@@ -29,9 +29,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Value("${password.user1}")
     private String password;
 
-    @Value("${security.enabled}")
-    private String isSecurityEnabled;
-
 
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
