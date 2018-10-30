@@ -1,5 +1,14 @@
 
-var lamdaRequest = function lambdaRequest(path,alias,commandType,argsCommandType,command,argsCommand){
+/**
+ * Lambda request Object
+ * @param {*} path 
+ * @param {*} alias 
+ * @param {*} commandType 
+ * @param {*} argsCommandType 
+ * @param {*} command 
+ * @param {*} argsCommand 
+ */
+var lamdaRequest = function lambdaRequest(path, alias, commandType, argsCommandType, command, argsCommand) {
     this.path = path;
     this.alias = alias;
     this.commandType = commandType;
@@ -8,16 +17,32 @@ var lamdaRequest = function lambdaRequest(path,alias,commandType,argsCommandType
     this.argsCommand = argsCommand;
 }
 
-var lamdaResponse = function lamdaResponse(processExecCode,output){
+/**
+ * Lambda response object
+ * @param {*} processExecCode 
+ * @param {*} output 
+ */
+var lamdaResponse = function lamdaResponse(processExecCode, output) {
     this.output = output;
     this.processExecCode = processExecCode;
 }
 
-function sendGetRequest(urlEndPoint, callback){
-    $.get(urlEndPoint,callback(data));
+/**
+ * Execute an get request.
+ * @param {*} urlEndPoint 
+ * @param {*} callback 
+ */
+function sendGetRequest(urlEndPoint, callback) {
+    $.get(urlEndPoint, callback(data));
 }
 
-function sendPostRequest(urlEndPoint, callback, payload){
+/**
+ * Execute an post request.
+ * @param {*} urlEndPoint 
+ * @param {*} callback 
+ * @param {*} payload 
+ */
+function sendPostRequest(urlEndPoint, callback, payload) {
 
     $.ajax({
         type: 'post',
@@ -30,24 +55,35 @@ function sendPostRequest(urlEndPoint, callback, payload){
     });
 }
 
-function getJsonRequestFromTextBox(){
+/**
+ * Get json text from text box
+ */
+function getJsonRequestFromTextBox() {
     var jsonString = document.getElementById("json-req").value;
     var req = JSON.parse(jsonString);
     return req;
 }
-function lamdaPostRequest(){
+
+/**
+ * Hides previous results and send a post request for data in getJsonRequestFromTextBox()
+ */
+function lamdaPostRequest() {
     hideResultBoxes();
     var url = 'http://localhost:8080/lambda/post/execute';
-    sendPostRequest(url,displayResult,getJsonRequestFromTextBox());
+    sendPostRequest(url, displayResult, getJsonRequestFromTextBox());
 }
-function displayResult(lamdaResponse){
-    if(lamdaResponse.processExecCode==-1){
+/**
+ * Call back function, displays result of lambda.
+ * @param {*} lamdaResponse 
+ */
+function displayResult(lamdaResponse) {
+    if (lamdaResponse.processExecCode == -1) {
         var boxFailParent = document.getElementById('result-fail-article');
         var boxFail = document.getElementById('result-fail-msg');
         boxFailParent.style.display = 'inherit';
         boxFail.innerHTML = lamdaResponse.output;
 
-    }else{
+    } else {
         var boxSuccessParent = document.getElementById('result-success-article');
         var boxSuccess = document.getElementById('result-success-msg');
         boxSuccessParent.style.display = 'inherit';
@@ -55,7 +91,10 @@ function displayResult(lamdaResponse){
     }
 }
 
-function hideResultBoxes(){
+/**
+ * Hides boxes.
+ */
+function hideResultBoxes() {
     var boxSuccess = document.getElementById('result-success-article');
     var boxFail = document.getElementById('result-fail-article');
     boxSuccess.style.display = 'none';
