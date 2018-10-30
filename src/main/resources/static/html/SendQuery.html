@@ -1,0 +1,99 @@
+<!--
+  ~ Copyright (c) 2018.  Gaurav Sharma, All rights reserved.
+  -->
+
+<html>
+
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+    <script src="/js/jquery-3.3.1.min.js"></script>
+
+    <script src="/js/executeQuery.js"></script>
+</head>
+
+<body onload="hideResultBoxes()">
+
+                        <nav class="navbar is-light" role="navigation" aria-label="main navigation">
+                                <div class="navbar-brand">
+
+                    <div class="navbar-item is-size-4-desktop has-text-weight-light">
+                      { Rest &Lambda; }
+                    </div>
+                    <a class="navbar-item">
+                            History
+                          </a>
+                  
+                    </div>
+
+                    </nav>
+
+                
+            
+            <section class="section is-small">
+                <div class="container">
+                        <div class="card">
+                                <header class="card-header">
+                                  <p class="card-header-title">
+                                        Lambda request
+                                  </p>
+                                  <a href="#" class="card-header-icon" aria-label="more options">
+                                    <span class="icon">
+                                      <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                    </span>
+                                  </a>
+                                </header>
+                                <div class="card-content">
+                                  <div class="content">
+                                        <div class="field">
+                                                <!-- <label class="label">Lambda request</label> -->
+                                                <div class="control">
+                                                  <textarea class="textarea is-small is-rounded" id="json-req" placeholder="Json request"></textarea>
+                                                </div>
+                                              </div>
+                                              
+                                              
+                                            <button class="button is-link is-rounded" onclick="lamdaPostRequest()">Execute</button>
+                                  </div>
+                                </div>
+    
+                              </div>
+                    
+             
+                </div>
+            
+            </section>
+            
+            <section class="section">
+            <div class="container">
+                    <article class="message is-success" id="result-success-article">
+                            <div class="message-header">
+                              <p>Success</p>
+                              <button class="delete" aria-label="delete"></button>
+                            </div>
+                            <div class="message-body" id="result-success-msg">
+                            </div>
+                    </article>
+
+                    <article class="message is-danger" id="result-fail-article">
+                            <div class="message-header">
+                              <p>Failure</p>
+                              <button class="delete" aria-label="delete"></button>
+                            </div>
+                            <div class="message-body" id="result-fail-msg">
+                            </div>
+                    </article>
+                    
+                    </div>
+            </section>
+            
+
+</body>
+
+
+
+
+
+
+
+</html>
