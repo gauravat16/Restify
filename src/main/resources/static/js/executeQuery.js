@@ -72,6 +72,7 @@ function lamdaPostRequest() {
     var url = 'http://localhost:8080/lambda/post/execute';
     sendPostRequest(url, displayResult, getJsonRequestFromTextBox());
 }
+
 /**
  * Call back function, displays result of lambda.
  * @param {*} lamdaResponse 
