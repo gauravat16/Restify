@@ -13,4 +13,6 @@ public interface RestJobRepository extends MongoRepository<RestJobPostBean, Stri
 
     List<RestJobPostBean> findByAlias(String alias);
 
+    List<RestJobPostBean> findLast10ByTimeStamp();
+
 }

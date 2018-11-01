@@ -69,7 +69,7 @@ function getJsonRequestFromTextBox() {
  */
 function lamdaPostRequest() {
     hideResultBoxes();
-    var url = 'http://localhost:8080/lambda/post/execute';
+    var url = '/lambda/post/execute';
     sendPostRequest(url, displayResult, getJsonRequestFromTextBox());
 }
 

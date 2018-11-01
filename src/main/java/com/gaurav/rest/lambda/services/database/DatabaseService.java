@@ -33,8 +33,12 @@ public class DatabaseService {
         restJobRepository.save(restJobPostBean);
     }
 
-    public List<RestJobPostBean> getRestPostHistory(String alias) {
+    public List<RestJobPostBean> getRestPostHistoryByAlias(String alias) {
         return restJobRepository.findByAlias(alias);
+    }
+
+    public List<RestJobPostBean> getLast10Records(){
+        return restJobRepository.findLast10ByTimeStamp();
     }
 
 

@@ -23,8 +23,16 @@ public class RestJobHistory {
     @RequestMapping(value = "lambda/history/{alias}")
     private List<RestJobPostBean> getHistory(@PathVariable String alias) {
 
-        return databaseService.getRestPostHistory(alias);
-
+        return databaseService.getRestPostHistoryByAlias(alias);
 
     }
+
+    @RequestMapping(value = "lambda/history/quick")
+    private List<RestJobPostBean> getQuickHistory(@PathVariable String alias) {
+
+        return databaseService.getLast10Records();
+
+    }
+
+
 }
