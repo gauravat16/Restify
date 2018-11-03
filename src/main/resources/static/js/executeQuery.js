@@ -185,8 +185,10 @@ function logData(data) {
     console.log(data);
 }
 
-
-$(document).ready(function(){
-        $("#header").load("/html/header.html"); 
-      });
+/**
+ * Loads header
+ */
+$(document).ready(function () {
+    $("#header").load("/html/header.html");
+});
 
