@@ -7,7 +7,7 @@ package com.gaurav.rest.lambda.services.database;
 import com.gaurav.rest.lambda.beans.dbpostbeans.RestJobPostBean;
 import com.gaurav.rest.lambda.repositories.RestJobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Service;
@@ -17,13 +17,6 @@ import java.util.List;
 @Service
 @EnableAsync
 public class DatabaseService {
-
-
-    @Value("${spring.data.mongodb.uri}")
-    String MONGO_DB_URI;
-
-    @Value("${spring.data.mongodb.database}")
-    String MONGO_DB_NAME;
 
     @Autowired
     RestJobRepository restJobRepository;
@@ -37,8 +30,8 @@ public class DatabaseService {
         return restJobRepository.findByAlias(alias);
     }
 
-    public List<RestJobPostBean> getLast10Records(){
-        return restJobRepository.findLast10ByTimeStamp();
+    public Iterable<RestJobPostBean> findAllPaginated(Pageable pageRequest){
+        return restJobRepository.findAll(pageRequest);
     }
 
 

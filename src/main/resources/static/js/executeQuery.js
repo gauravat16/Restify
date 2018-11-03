@@ -4,17 +4,42 @@
  * @param {*} path 
  * @param {*} alias 
  * @param {*} commandType 
- * @param {*} argsCommandType 
+ * @param {*} argsForCommandType 
  * @param {*} command 
- * @param {*} argsCommand 
+ * @param {*} argsForCommand 
  */
-var lamdaRequest = function lambdaRequest(path, alias, commandType, argsCommandType, command, argsCommand) {
+var LamdaRequest = function lambdaRequest(path, alias, commandType, argsForCommandType, command, argsForCommand, waitTime) {
     this.path = path;
     this.alias = alias;
     this.commandType = commandType;
-    this.argsCommandType = argsCommandType;
+    this.argsForCommandType = argsForCommandType;
     this.command = command;
-    this.argsCommand = argsCommand;
+    this.argsForCommand = argsForCommand;
+    this.waitTime = waitTime;
+}
+
+/**
+ * Lambda History Object.
+ * @param {*} path 
+ * @param {*} alias 
+ * @param {*} commandType 
+ * @param {*} argsForCommandType 
+ * @param {*} command 
+ * @param {*} argsForCommand 
+ * @param {*} waitTime 
+ * @param {*} lamdaResponse 
+ * @param {*} timeStamp 
+ */
+var LambdaHistory = function lambdaHistory(path, alias, commandType, argsForCommandType, command, argsForCommand, waitTime, lamdaResponse, timeStamp) {
+    this.path = path;
+    this.alias = alias;
+    this.commandType = commandType;
+    this.argsForCommandType = argsForCommandType;
+    this.command = command;
+    this.argsForCommand = argsForCommand;
+    this.waitTime = waitTime;
+    this.response = lamdaResponse;
+    this.timeStamp = timeStamp;
 }
 
 /**
@@ -22,18 +47,19 @@ var lamdaRequest = function lambdaRequest(path, alias, commandType, argsCommandT
  * @param {*} processExecCode 
  * @param {*} output 
  */
-var lamdaResponse = function lamdaResponse(processExecCode, output) {
+var LamdaResponse = function lamdaResponse(processExecCode, output) {
     this.output = output;
     this.processExecCode = processExecCode;
 }
 
 /**
  * Execute an get request.
- * @param {*} urlEndPoint 
+ * @param {*} urlEndPoint
+ * @param params for get request
  * @param {*} callback 
  */
-function sendGetRequest(urlEndPoint, callback) {
-    $.get(urlEndPoint, callback(data));
+function sendGetRequest(urlEndPoint, params, callback) {
+    $.get(urlEndPoint, params, callback);
 }
 
 /**
@@ -101,3 +127,66 @@ function hideResultBoxes() {
     boxSuccess.style.display = 'none';
     boxFail.style.display = 'none';
 }
+
+/**
+ * Current page number
+ */
+var currentPageNumber = 0;
+
+/**
+ * Function to get history data for page number.
+ */
+function getHistoryPageForPageNumber() {
+    var url = "/lambda/history";
+    sendGetRequest(url, { 'page': currentPageNumber++ }, consumeHistoryJson);
+}
+
+/**
+ * Consumes history json data and will convert them into LambdaHistory objects.
+ * @param {*} jsonData 
+ */
+function consumeHistoryJson(jsonData) {
+    var lambdaHistoryList = [];
+    jsonData.forEach(element => {
+        var historyObj = Object.assign(new LambdaHistory, element);
+        lambdaHistoryList.push(historyObj);
+    });
+    displayHistory(lambdaHistoryList);
+}
+
+/**
+ * Displays history in a table.
+ * @param {*} lambdaHistoryList 
+ */
+function displayHistory(lambdaHistoryList) {
+    var tableBody = $("#history-table-body");
+
+    lambdaHistoryList.forEach(historyObj => {
+        var markup = "<tr>";
+        Object.keys(historyObj).forEach(key => {
+            if (key === 'response') {
+                markup += '<td>' + JSON.stringify(historyObj[key]) + '</td>';
+
+            } else {
+                markup += '<td>' + historyObj[key] + '</td>';
+
+            }
+        })
+        markup += '</tr>';
+        tableBody.append(markup);
+    });
+}
+
+/**
+ * Log data
+ * @param {*} data 
+ */
+function logData(data) {
+    console.log(data);
+}
+
+
+$(document).ready(function(){
+        $("#header").load("/html/header.html"); 
+      });
+

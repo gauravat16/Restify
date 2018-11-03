@@ -15,4 +15,9 @@ public class UIController {
     String openDashboard(){
         return "/html/SendQuery.html";
     }
+
+    @RequestMapping(value = "/lambda/dashboard/history")
+    String openHistory(){
+        return "/html/History.html";
+    }
 }
