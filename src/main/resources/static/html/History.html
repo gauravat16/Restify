@@ -12,8 +12,8 @@
     <div id="header"></div>
 
     <div class="section">
-        <div class="container">
-                <table class="table is-striped is-hoverable is-size-6-desktop has-text-weight-light">
+        <div class="container" >
+                <table class="table is-striped is-hoverable is-size-6-desktop has-text-weight-light" id="history-table">
                     <thead>
                                 <tr>
                                     <th>Path</th>
@@ -23,7 +23,6 @@
                                     <th>Command</th>
                                     <th>Args Cmd</th>
                                     <th>Wait Time</th>
-                                    <th>Response</th>
                                     <th>Time Stamp</th>
 
                                 </tr>
@@ -33,9 +32,25 @@
 
                         </tbody>
                     </table>
-                    <a href="#" onclick="getHistoryPageForPageNumber()">more</a>
+            <button class="button is-outlined is-small is-outlined is-primary" id="loadMore" aria-label="Load More"> Load More</button>
+
         </div>
+
     </div>
+
+    <div class="modal is-size-6-desktop has-text-weight-light">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+              <header class="modal-card-head">
+                <p class="modal-card-title">Response</p>
+                <button class="delete" aria-label="close"></button>
+              </header>
+              <section class="modal-card-body">
+                  <div class="modal-card-body-data"></div>
+              </section>
+
+            </div>
+          </div>
   
 
 </body>

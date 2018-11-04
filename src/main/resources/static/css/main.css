@@ -1,3 +1,7 @@
 .hidden{
     display: none;
 }
+
+.height-body{
+height : auto;
+}

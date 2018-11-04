@@ -132,6 +132,7 @@ function hideResultBoxes() {
  * Current page number
  */
 var currentPageNumber = 0;
+var currentRowNumber = 0;
 
 /**
  * Function to get history data for page number.
@@ -142,6 +143,12 @@ function getHistoryPageForPageNumber() {
 }
 
 /**
+ * Key - row id
+ * Value - Object
+ */
+var lambdaHistoryMap = {};
+
+/**
  * Consumes history json data and will convert them into LambdaHistory objects.
  * @param {*} jsonData 
  */
@@ -149,8 +156,14 @@ function consumeHistoryJson(jsonData) {
     var lambdaHistoryList = [];
     jsonData.forEach(element => {
         var historyObj = Object.assign(new LambdaHistory, element);
+        historyObj.timeStamp = formatDate(historyObj.timeStamp);
         lambdaHistoryList.push(historyObj);
     });
+
+    //Sort in reverse order.
+    lambdaHistoryList.sort(function (a, b) {
+        return b.timeStamp - a.timeStamp;
+    })
     displayHistory(lambdaHistoryList);
 }
 
@@ -160,21 +173,74 @@ function consumeHistoryJson(jsonData) {
  */
 function displayHistory(lambdaHistoryList) {
     var tableBody = $("#history-table-body");
+    var rowIdFormat = "history-row-";
 
     lambdaHistoryList.forEach(historyObj => {
-        var markup = "<tr>";
+
+        //cache the data
+        lambdaHistoryMap[currentRowNumber] = historyObj;
+
+        var currRowId = rowIdFormat + currentRowNumber;
+        var markup = "<tr class='clickable-row' id='" + currRowId + "'>";
+
         Object.keys(historyObj).forEach(key => {
-            if (key === 'response') {
-                markup += '<td>' + JSON.stringify(historyObj[key]) + '</td>';
-
-            } else {
+            if (key !== 'response') {
+                if (historyObj[key] === null) {
+                    historyObj[key] = "n/a";
+                }
                 markup += '<td>' + historyObj[key] + '</td>';
-
             }
-        })
+        });
         markup += '</tr>';
         tableBody.append(markup);
+
+        setUpModal(currRowId, historyObj);
+
+        scrollToRow(rowIdFormat);
+
+        currentRowNumber += 1;
     });
+
+}
+
+/**
+ * This function sets up the response modal.
+ * 
+ * @param {The row that is currently being appended} currRowId 
+ * @param {The historyObj that is being converted to a row} historyObj 
+ */
+function setUpModal(currRowId, historyObj) {
+    $("#" + currRowId).click(function () {
+        var modalBody = document.getElementsByClassName('modal-card-body-data')[0];
+        modalBody.innerHTML = JSON.stringify(historyObj['response']);
+        $(".modal").addClass("is-active");
+    });
+
+    $(".delete").click(function () {
+        $(".modal").removeClass("is-active");
+    });
+}
+
+/**
+ * This function scrolls down to an newly added row.
+ * @param {The format of a row' Id} rowIdFormat 
+ */
+function scrollToRow(rowIdFormat) {
+    var scrollToElemId = rowIdFormat + currentRowNumber;
+    var scrollTo = $('#' + scrollToElemId);
+    $("html,body").stop().animate({ scrollTop: scrollTo.offset().top }, 500);
+}
+
+/**
+ * This function converts dot separated date string into date Object.
+ * 
+ * @param {dot separated date} dotDate 
+ */
+function formatDate(dotDate) {
+    var splitDate = dotDate.split(".");
+    var dd = splitDate[2], MM = splitDate[1], yyyy = splitDate[0], hh = splitDate[3], mm = splitDate[4], ss = splitDate[5];
+    var date = new Date(yyyy + "-" + MM + "-" + dd + "T" + hh + ":" + mm + ":" + ss + "Z");
+    return date;
 }
 
 /**
@@ -186,9 +252,18 @@ function logData(data) {
 }
 
 /**
- * Loads header
+ * Functions ran at document load. 
  */
 $(document).ready(function () {
     $("#header").load("/html/header.html");
+
+    $("#loadMore").click(function (event) {
+        event.preventDefault();
+        getHistoryPageForPageNumber();
+    });
 });
+
+
+
+
 

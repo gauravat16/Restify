@@ -9,6 +9,7 @@ import com.gaurav.rest.lambda.services.database.DatabaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,7 +36,7 @@ public class RestJobHistory {
     private List<RestJobPostBean> getHistory(@RequestParam("page") int page) {
 
         List<RestJobPostBean> beans = new ArrayList<>();
-        databaseService.findAllPaginated(PageRequest.of(page, 10)).forEach(restJobPostBean -> beans.add(restJobPostBean));
+        databaseService.findAllPaginated(PageRequest.of(page, 10, Sort.Direction.DESC,"timeStamp")).forEach(restJobPostBean -> beans.add(restJobPostBean));
 
         return beans;
 
