@@ -1,0 +1,84 @@
+<!--
+  ~ Copyright (c) 2018.  Gaurav Sharma, All rights reserved.
+  -->
+
+<html>
+
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/executeQuery.js"></script>
+</head>
+
+<body onload="hideResultBoxes()">
+
+    <div id="header"></div>
+ 
+    <section class="section is-small">
+        <div class="container">
+            <div class="card">
+                <header class="card-header">
+                    <p class="card-header-title has-text-weight-light">
+                        Lambda request
+                    </p>
+                    <a href="#" class="card-header-icon" aria-label="more options">
+                        <span class="icon">
+                            <i class="fas fa-angle-down" aria-hidden="true"></i>
+                        </span>
+                    </a>
+                </header>
+                <div class="card-content">
+                    <div class="content">
+                        <div class="field">
+                            <div class="control">
+                                <textarea class="textarea is-small is-rounded is-primary" rows="15" id="json-req" placeholder="Json request"></textarea>
+                            </div>
+                        </div>
+
+
+                        <button class="button is-primary" onclick="lamdaPostRequest()">Execute</button>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+    <section class="section" >
+        <div class="container">
+            <article class="message is-success is-small hidden" id="result-success-article" >
+                <div class="message-header">
+                    <p>Success</p>
+                    <button class="delete" aria-label="delete" onclick="hideResultBoxes()"></button>
+                </div>
+                <div class="message-body" id="result-success-msg">
+                </div>
+            </article>
+
+            <article class="message is-danger is-small hidden" id="result-fail-article">
+                <div class="message-header">
+                    <p>Failure</p>
+                    <button class="delete" aria-label="delete" onclick="hideResultBoxes()"></button>
+                </div>
+                <div class="message-body" id="result-fail-msg">
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+
+</body>
+
+
+
+
+
+
+
+</html>

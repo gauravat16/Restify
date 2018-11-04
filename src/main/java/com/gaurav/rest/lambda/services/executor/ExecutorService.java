@@ -9,6 +9,7 @@ import com.gaurav.rest.lambda.beans.ExecutorTaskOutput;
 import com.gaurav.rest.lambda.configuration.RestConfigurationManager;
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
+import org.apache.commons.exec.ExecuteWatchdog;
 import org.apache.commons.exec.PumpStreamHandler;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,8 @@ public class ExecutorService {
         DefaultExecutor executor = new DefaultExecutor();
         executor.setWorkingDirectory(new File(executorTask.getPath()));
         executor.setStreamHandler(pumpStreamHandler);
+        ExecuteWatchdog watchdog = new ExecuteWatchdog(executorTask.getWaitTime()*1000);
+        executor.setWatchdog(watchdog);
 
         int exitValue = executor.execute(cmdLine);
 
