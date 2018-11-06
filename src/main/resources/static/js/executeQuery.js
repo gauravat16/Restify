@@ -52,14 +52,16 @@ var LamdaResponse = function lamdaResponse(processExecCode, output) {
     this.processExecCode = processExecCode;
 }
 
+$.ajaxSetup({ timeout: 1000 });
+
 /**
  * Execute an get request.
  * @param {*} urlEndPoint
  * @param params for get request
  * @param {*} callback 
  */
-function sendGetRequest(urlEndPoint, params, callback) {
-    $.get(urlEndPoint, params, callback);
+function sendGetRequest(urlEndPoint, params, callback, failCallback) {
+    $.get(urlEndPoint, params, callback).fail(failCallback);
 }
 
 /**
@@ -139,7 +141,7 @@ var currentRowNumber = 0;
  */
 function getHistoryPageForPageNumber() {
     var url = "/lambda/history";
-    sendGetRequest(url, { 'page': currentPageNumber++ }, consumeHistoryJson);
+    sendGetRequest(url, { 'page': currentPageNumber++ }, consumeHistoryJson, handleErrorsInHistoryRequest);
 }
 
 /**
@@ -153,6 +155,9 @@ var lambdaHistoryMap = {};
  * @param {*} jsonData 
  */
 function consumeHistoryJson(jsonData) {
+    if (handleMissingHisory(jsonData)) {
+        return;
+    }
     var lambdaHistoryList = [];
     jsonData.forEach(element => {
         var historyObj = Object.assign(new LambdaHistory, element);
@@ -241,6 +246,53 @@ function formatDate(dotDate) {
     var dd = splitDate[2], MM = splitDate[1], yyyy = splitDate[0], hh = splitDate[3], mm = splitDate[4], ss = splitDate[5];
     var date = new Date(yyyy + "-" + MM + "-" + dd + "T" + hh + ":" + mm + ":" + ss + "Z");
     return date;
+}
+
+/**
+ * This function handles 500 & 0 response codes.
+ * 
+ * @param {response from sendGetRequest} responseStatus 
+ */
+function handleErrorsInHistoryRequest(responseStatus) {
+    if (responseStatus.status == 500 || responseStatus.status == 0) {
+        handleUIForBadResponse(true);
+    }
+}
+
+/**
+ * This function handles empty history data.
+ * 
+ * @param {data obtained by consumeHistoryJson} historyList 
+ */
+function handleMissingHisory(historyList) {
+    if (historyList.length == 0) {
+        handleUIForBadResponse(currentRowNumber == 0);
+        return true;
+    }
+
+    return false;
+}
+
+/**
+ * This function hides the loadMore button & historyTable(depends on shouldHideTable).
+ * Also displays an error msg.
+ * 
+ * @param {a boolean that dictates if the history table is to be hidden} shouldHideTable 
+ */
+function handleUIForBadResponse(shouldHideTable) {
+    var loadMoreBtn = document.getElementById("loadMore");
+    var hiddenErrorDiv = document.getElementById("error-msg");
+    var historyTable = document.getElementById("history-table");
+
+    loadMoreBtn.style.visibility = 'hidden';
+    if (shouldHideTable) {
+        hiddenErrorDiv.innerHTML = "Sorry there is no data to display.";
+        historyTable.classList.add("hidden");
+        hiddenErrorDiv.classList.remove("hidden");
+    } else {
+        hiddenErrorDiv.innerHTML = "You have reached the end of history.";
+        hiddenErrorDiv.classList.remove("hidden");
+    }
 }
 
 /**
