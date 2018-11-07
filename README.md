@@ -8,6 +8,17 @@ Now used Chain wide in Walgreens <img src="https://pbs.twimg.com/profile_images/
 
 This project is under development. Please feel free to fork and contribute! 😀
 
+## Dashboard
+
+### Fire custom lamda requests
+![SS_1](https://github.com/gauravat16/rest-lambda/blob/master/screen-shots/ss_dashboard1.png)
+
+### Paginated history
+![SS_2](https://github.com/gauravat16/rest-lambda/blob/master/screen-shots/ss_dashboard2.png)
+
+### Click on any row to view response
+![SS_3](https://github.com/gauravat16/rest-lambda/blob/master/screen-shots/ss_dashboard3.png)
+
 
 ## How to use
 
