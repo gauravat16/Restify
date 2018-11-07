@@ -52,7 +52,7 @@ var LamdaResponse = function lamdaResponse(processExecCode, output) {
     this.processExecCode = processExecCode;
 }
 
-$.ajaxSetup({ timeout: 1000 });
+$.ajaxSetup({ timeout: 1000  });
 
 /**
  * Execute an get request.
@@ -60,8 +60,9 @@ $.ajaxSetup({ timeout: 1000 });
  * @param params for get request
  * @param {*} callback 
  */
-function sendGetRequest(urlEndPoint, params, callback, failCallback) {
-    $.get(urlEndPoint, params, callback).fail(failCallback);
+function sendGetRequest(urlEndPoint, params, callback, failCallback, beforeSendCallback, afterSendCallback) {
+    beforeSendCallback();
+    $.get(urlEndPoint, params, callback).fail(failCallback).done(afterSendCallback);
 }
 
 /**
@@ -70,8 +71,8 @@ function sendGetRequest(urlEndPoint, params, callback, failCallback) {
  * @param {*} callback 
  * @param {*} payload 
  */
-function sendPostRequest(urlEndPoint, callback, payload) {
-
+function sendPostRequest(urlEndPoint, callback, payload, beforeSendCallback, afterSendCallback) {
+    beforeSendCallback();
     $.ajax({
         type: 'post',
         dataType: 'json',
@@ -79,8 +80,9 @@ function sendPostRequest(urlEndPoint, callback, payload) {
         data: JSON.stringify(payload),
         contentType: "application/json; charset=utf-8",
         traditional: true,
+        timeout: 1000000,
         success: callback
-    });
+    }).done(afterSendCallback);
 }
 
 /**
@@ -98,7 +100,7 @@ function getJsonRequestFromTextBox() {
 function lamdaPostRequest() {
     hideResultBoxes();
     var url = '/lambda/post/execute';
-    sendPostRequest(url, displayResult, getJsonRequestFromTextBox());
+    sendPostRequest(url, displayResult, getJsonRequestFromTextBox(),  function(){loadMoreAnimation('executebtn')},  function(){loadedMoreAnimationRemoved('executebtn')});
 }
 
 /**
@@ -141,7 +143,7 @@ var currentRowNumber = 0;
  */
 function getHistoryPageForPageNumber() {
     var url = "/lambda/history";
-    sendGetRequest(url, { 'page': currentPageNumber++ }, consumeHistoryJson, handleErrorsInHistoryRequest);
+    sendGetRequest(url, { 'page': currentPageNumber++ }, consumeHistoryJson, function(){ loadMoreAnimation('loadMore')}, function(){ loadedMoreAnimationRemoved('loadMore')});
 }
 
 /**
@@ -314,6 +316,26 @@ $(document).ready(function () {
         getHistoryPageForPageNumber();
     });
 });
+
+/**
+ * Display loading animation.
+ * 
+ * @param {Button's id which will display loading button} buttonId 
+ */
+function loadMoreAnimation(buttonId){
+    var loadMoreBtn = document.getElementById(buttonId);
+    loadMoreBtn.classList.add('is-loading');
+}
+
+/**
+ * Remove loading animation.
+ * 
+ * @param {Button's id which is displaying loading button} buttonId 
+ */
+function loadedMoreAnimationRemoved(buttonId){
+    var loadMoreBtn = document.getElementById(buttonId);
+    loadMoreBtn.classList.remove('is-loading');
+}
 
 
 
