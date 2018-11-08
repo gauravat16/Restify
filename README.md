@@ -1,4 +1,7 @@
- # rest-lambda [![Build Status](https://travis-ci.org/gauravat16/rest-lambda.svg?branch=master)](https://travis-ci.org/gauravat16/rest-lambda) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+![{REST Λ}](https://github.com/gauravat16/rest-lambda/blob/master/screen-shots/rest-lambda.png)
+
+
+[![Build Status](https://travis-ci.org/gauravat16/rest-lambda.svg?branch=master)](https://travis-ci.org/gauravat16/rest-lambda) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
 
