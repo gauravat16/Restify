@@ -309,7 +309,7 @@ function logData(data) {
  * Functions ran at document load. 
  */
 $(document).ready(function () {
-    $("#header").load("/html/header.html");
+    $("#header").load("/html/Header.html");
 
     $("#loadMore").click(function (event) {
         event.preventDefault();

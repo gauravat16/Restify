@@ -16,6 +16,11 @@ public class UIController {
         return "/html/SendQuery.html";
     }
 
+    @RequestMapping(value = "/")
+    String openDefault(){
+        return "/html/SendQuery.html";
+    }
+
     @RequestMapping(value = "/lambda/dashboard/history")
     String openHistory(){
         return "/html/History.html";
