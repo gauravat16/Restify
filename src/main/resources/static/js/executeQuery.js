@@ -52,7 +52,7 @@ var LamdaResponse = function lamdaResponse(processExecCode, output) {
     this.processExecCode = processExecCode;
 }
 
-$.ajaxSetup({ timeout: 2000  });
+$.ajaxSetup({ timeout: 4000  });
 
 /**
  * Execute an get request.
