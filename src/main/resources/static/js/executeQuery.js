@@ -143,7 +143,7 @@ var currentRowNumber = 0;
  */
 function getHistoryPageForPageNumber() {
     var url = "/lambda/history";
-    sendGetRequest(url, { 'page': currentPageNumber++ }, consumeHistoryJson, function(){ loadMoreAnimation('loadMore')}, function(){ loadedMoreAnimationRemoved('loadMore')});
+    sendGetRequest(url, { 'page': currentPageNumber++ }, consumeHistoryJson, handleErrorsInHistoryRequest, function(){ loadMoreAnimation('loadMore')}, function(){ loadedMoreAnimationRemoved('loadMore')});
 }
 
 /**
