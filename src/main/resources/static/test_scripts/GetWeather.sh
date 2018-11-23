@@ -1,5 +1,7 @@
 #!/bin/bash
 
+current_city=$1
+
 setup_env(){
     unameOut="$(uname -s)"
     case "${unameOut}" in
@@ -55,8 +57,10 @@ get_jq(){
 }
 
 get_current_city(){
-    echo "$(curl -s 'http://ip-api.com/json')" > $resources/$location_json
-    current_city=$(./$bin/jq -r '.city' $resources/$location_json)
+    if [[ -z "$current_city" ]];then
+        echo "$(curl -s 'http://ip-api.com/json')" > $resources/$location_json
+        current_city=$(./$bin/jq -r '.city' $resources/$location_json)
+    fi
 }
 
 get_weather_response(){
