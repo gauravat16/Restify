@@ -20,48 +20,45 @@ import java.util.HashMap;
 public class RestConfigurationManager {
 
 
-    private static RestConfigurationManager restConfigurationManager = null;
     private static RestConfiguration restConfiguration = null;
     private static HashMap<String, RestJob> restJobHashMap = new HashMap<>();
     private static final Logger logger = LoggerFactory.getLogger(RestConfigurationManager.class);
 
-
     private RestConfigurationManager() {
+        logger.info("RestConfigurationManager :: Instantiate");
+        setUpXMLConfig();
+    }
 
+
+    private void setUpXMLConfig() {
+        try {
+            restConfiguration = (RestConfiguration) ConfigurationUtil.XMLtoObject(RestConfiguration.class, ConfigurationConstants.REST_CONFIG_FILE);
+            instantiateRestJobMap();
+        } catch (JAXBException e) {
+
+            logger.error("Could not parse xml file - " + ConfigurationConstants.REST_CONFIG_FILE, e);
+
+        } catch (FileNotFoundException e) {
+            logger.error("xml file not found- " + ConfigurationConstants.REST_CONFIG_FILE);
+        }
+    }
+
+    private static class RestConfigurationManagerHelper {
+        private static final RestConfigurationManager INSTANCE = new RestConfigurationManager();
     }
 
 
     public static RestConfigurationManager getInstance() {
-        logger.info("RestConfigurationManager :: Instantiate");
-
-        if (null == restConfigurationManager) {
-            try {
-                restConfiguration = (RestConfiguration) ConfigurationUtil.XMLtoObject(RestConfiguration.class, ConfigurationConstants.REST_CONFIG_FILE);
-                instantiateRestJobMap();
-                return new RestConfigurationManager();
-
-            } catch (JAXBException e) {
-
-                logger.error("Could not parse xml file - " + ConfigurationConstants.REST_CONFIG_FILE, e);
-
-            } catch (FileNotFoundException e) {
-                logger.error("xml file not found- " + ConfigurationConstants.REST_CONFIG_FILE, e);
-
-            }
-
-
-        }
-
-        return restConfigurationManager;
+        return RestConfigurationManagerHelper.INSTANCE;
     }
 
 
     private static void instantiateRestJobMap() {
-		logger.info("Going to instantiate rest job map");
-		if (null != restConfiguration) {
-			restConfiguration.getJobs().forEach(job -> restJobHashMap.put(job.getAlias(), job));
-		} else {
-			logger.debug("restConfiguration is null");
+        logger.info("Going to instantiate rest job map");
+        if (null != restConfiguration) {
+            restConfiguration.getJobs().forEach(job -> restJobHashMap.put(job.getAlias(), job));
+        } else {
+            logger.debug("restConfiguration is null");
 
         }
     }
@@ -71,18 +68,14 @@ public class RestConfigurationManager {
     }
 
     public void addRestJob(RestJob restJob) {
-    	
+
         restJobHashMap.put(restJob.getAlias(), restJob);
     }
 
 
     public void refreshConfiguration() {
         logger.info("Going to refresh rest job map");
-
-        restConfigurationManager = null;
-
-        RestConfigurationManager.getInstance();
-
+        setUpXMLConfig();
 
     }
 
