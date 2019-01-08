@@ -5,7 +5,6 @@
 package com.gaurav.rest.lambda.controllers;
 
 import com.gaurav.rest.lambda.beans.ExecutorTaskOutput;
-import com.gaurav.rest.lambda.beans.dbpostbeans.RestJobPostBean;
 import com.gaurav.rest.lambda.configuration.RestConfigurationManager;
 import com.gaurav.rest.lambda.constants.ErrorCodes;
 import com.gaurav.rest.lambda.constants.ExecutorConstants;
@@ -26,8 +25,7 @@ public class ProcessController {
     @Autowired
     private ExecutorService executorService;
 
-    @Autowired
-    private RestConfigurationManager restConfigurationManager;
+    private RestConfigurationManager restConfigurationManager = RestConfigurationManager.getInstance();
 
     @Autowired
     private DatabaseService databaseService;
@@ -36,10 +34,8 @@ public class ProcessController {
 
 
     @RequestMapping(value = "/lambda/get/execute/{scriptName}")
-    public Response executeScripts(@PathVariable String scriptName) {
+    public Response executeScripts(@PathVariable String scriptName) throws IOException {
         Response response;
-
-        logger.info("Current Rest Call for Script ::: " + scriptName);
 
         RestJob restJob = restConfigurationManager.getRestJob(scriptName);
 
@@ -56,32 +52,9 @@ public class ProcessController {
         ExecutorTask executorTask = buildTaskbyRestJob(restJob);
 
 
-        try {
-
-            taskOutput = executorService.executeTask(executorTask);
-            response = new Response(String.valueOf(taskOutput.getExitCode()));
-            response.setOutput(taskOutput.getOutput());
-
-
-        } catch (IOException ioEx) {
-
-            logger.error("File Not Found", ioEx);
-            response = new Response(String.valueOf(ErrorCodes.ERROR_TERMINATE));
-            response.setOutput(ioEx.toString());
-
-        } catch (Exception e) {
-
-            logger.error("Script execution failed! ", e);
-            response = new Response(String.valueOf(ErrorCodes.ERROR_TERMINATE));
-            response.setOutput(e.toString());
-
-        }
-
-
-        RestJobPostBean restJobPostBean = new RestJobPostBean(response);
-        restJobPostBean.setRestJob(restJob);
-
-        databaseService.addJob(restJobPostBean);
+        taskOutput = executorService.executeTask(executorTask);
+        response = new Response(String.valueOf(taskOutput.getExitCode()));
+        response.setOutput(taskOutput.getOutput());
 
 
         return response;
@@ -89,9 +62,8 @@ public class ProcessController {
 
 
     @PostMapping(value = "/lambda/post/execute")
-    public Response executeScripts(@RequestBody RestJob restJob) {
+    public Response executeScripts(@RequestBody RestJob restJob) throws IOException {
 
-        logger.info("Rest Job Recieved " + restJob);
         restConfigurationManager.addRestJob(restJob);
 
         ExecutorTaskOutput taskOutput;
@@ -99,34 +71,10 @@ public class ProcessController {
         ExecutorTask executorTask = buildTaskbyRestJob(restJob);
 
 
-        try {
+        taskOutput = executorService.executeTask(executorTask);
+        response = new Response(String.valueOf(taskOutput.getExitCode()));
+        response.setOutput(taskOutput.getOutput());
 
-            taskOutput = executorService.executeTask(executorTask);
-            response = new Response(String.valueOf(taskOutput.getExitCode()));
-            response.setOutput(taskOutput.getOutput());
-
-
-        } catch (IOException ioEx) {
-
-            logger.error("File Not Found", ioEx);
-            response = new Response(String.valueOf(ErrorCodes.ERROR_TERMINATE));
-            response.setOutput(ioEx.toString());
-
-        } catch (Exception e) {
-
-            logger.error("Script execution failed! ", e);
-            response = new Response(String.valueOf(ErrorCodes.ERROR_TERMINATE));
-            response.setOutput(e.toString());
-
-        }
-
-
-        RestJobPostBean restJobPostBean = new RestJobPostBean(response);
-        restJobPostBean.setRestJob(restJob);
-
-        databaseService.addJob(restJobPostBean);
-
-        logger.info("Response for  " + restJob.getAlias() + "=====>" + response);
 
         return response;
 

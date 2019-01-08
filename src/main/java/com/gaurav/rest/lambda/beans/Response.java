@@ -30,4 +30,12 @@ public class Response {
     public void setOutput(String output) {
         this.output = output;
     }
+
+    @Override
+    public String toString() {
+        return "Response{" +
+                "processExecCode='" + processExecCode + '\'' +
+                ", output='" + output + '\'' +
+                '}';
+    }
 }

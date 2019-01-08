@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class RefreshConfiguration {
 
-    @Autowired
-    RestConfigurationManager restConfigurationManager;
+    RestConfigurationManager restConfigurationManager = RestConfigurationManager.getInstance();
 
     @RequestMapping(value = "/lambda/refresh")
     public Response refreshConfiguration(){

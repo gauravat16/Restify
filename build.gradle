@@ -45,6 +45,8 @@ dependencies {
     testCompile('org.springframework.boot:spring-boot-starter-test')
     compile 'org.springframework.data:spring-data-mongodb:2.0.9.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.0.5.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-aop', version: '2.0.2.RELEASE'
+
 
 
 }

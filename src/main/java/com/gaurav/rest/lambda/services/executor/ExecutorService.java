@@ -23,8 +23,7 @@ import java.util.Arrays;
 @Service
 public class ExecutorService {
 
-    @Autowired
-    private RestConfigurationManager restConfigurationManager;
+    private RestConfigurationManager restConfigurationManager = RestConfigurationManager.getInstance();
 
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(ExecutorService.class);
 
