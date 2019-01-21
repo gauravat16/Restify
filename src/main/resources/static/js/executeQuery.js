@@ -90,7 +90,12 @@ function sendPostRequest(urlEndPoint, callback, payload, beforeSendCallback, aft
  */
 function getJsonRequestFromTextBox() {
     var jsonString = document.getElementById("json-req").value;
-    var req = JSON.parse(jsonString);
+    var req;
+    try{
+       req = JSON.parse(jsonString);
+    }catch(err){
+       return new LamdaResponse("-1",err);
+    }
     return req;
 }
 
@@ -100,7 +105,12 @@ function getJsonRequestFromTextBox() {
 function lamdaPostRequest() {
     hideResultBoxes();
     var url = '/lambda/post/execute';
-    sendPostRequest(url, displayResult, getJsonRequestFromTextBox(),  function(){loadMoreAnimation('executebtn')},  function(){loadedMoreAnimationRemoved('executebtn')});
+    var textBoxReq = getJsonRequestFromTextBox();
+    if(textBoxReq instanceof LamdaResponse){
+        displayResult(textBoxReq);
+    }else{
+        sendPostRequest(url, displayResult, getJsonRequestFromTextBox(),  function(){loadMoreAnimation('executebtn')},  function(){loadedMoreAnimationRemoved('executebtn')});
+    }
 }
 
 /**
