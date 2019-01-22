@@ -94,7 +94,7 @@ function getJsonRequestFromTextBox() {
     try{
        req = JSON.parse(jsonString);
     }catch(err){
-       return new LamdaResponse("-1",err);
+       return new LamdaResponse("-1","The JSON request is malformed<p>" + err);
     }
     return req;
 }
