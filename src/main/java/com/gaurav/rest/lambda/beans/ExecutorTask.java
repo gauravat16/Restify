@@ -27,7 +27,6 @@ public class ExecutorTask {
         this.alias = executorTaskBuilder.alias;
     }
 
-
     public String getPath() {
         return path;
     }
@@ -72,6 +71,7 @@ public class ExecutorTask {
             this.command = command;
             this.commandType = commandType;
             this.alias = alias;
+
         }
 
         public ExecutorTaskBuilder setPath(String path) {
@@ -107,6 +107,7 @@ public class ExecutorTask {
             this.commandType = commandType;
             return this;
         }
+
 
         public String getAlias() {
             return alias;

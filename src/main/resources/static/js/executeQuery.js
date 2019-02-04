@@ -47,8 +47,9 @@ var LambdaHistory = function lambdaHistory(path, alias, commandType, argsForComm
  * @param {*} processExecCode 
  * @param {*} output 
  */
-var LamdaResponse = function lamdaResponse(processExecCode, output) {
+var LamdaResponse = function lamdaResponse(processExecCode, output, errors) {
     this.output = output;
+    this.errors = errors;
     this.processExecCode = processExecCode;
 }
 
@@ -118,17 +119,17 @@ function lamdaPostRequest() {
  * @param {*} lamdaResponse 
  */
 function displayResult(lamdaResponse) {
-    if (lamdaResponse.processExecCode == -1) {
+    if (lamdaResponse.processExecCode != 0) {
         var boxFailParent = document.getElementById('result-fail-article');
         var boxFail = document.getElementById('result-fail-msg');
         boxFailParent.style.display = 'inherit';
-        boxFail.innerHTML = lamdaResponse.output;
+        boxFail.innerHTML = JSON.stringify(lamdaResponse);
 
     } else {
         var boxSuccessParent = document.getElementById('result-success-article');
         var boxSuccess = document.getElementById('result-success-msg');
         boxSuccessParent.style.display = 'inherit';
-        boxSuccess.innerHTML = lamdaResponse.output;
+        boxSuccess.innerHTML = JSON.stringify(lamdaResponse);
     }
 }
 

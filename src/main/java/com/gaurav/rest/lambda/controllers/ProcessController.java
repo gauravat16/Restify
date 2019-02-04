@@ -74,7 +74,8 @@ public class ProcessController {
         taskOutput = executorService.executeTask(executorTask);
         response = new Response(String.valueOf(taskOutput.getExitCode()));
         response.setOutput(taskOutput.getOutput());
-
+        response.setErrors(taskOutput.getErrorOut());
+        response.setProcessExecCode(String.valueOf(taskOutput.getExitCode()));
 
         return response;
 

@@ -8,6 +8,15 @@ public class ExecutorTaskOutput {
 
     private int exitCode;
     private String output;
+    private String errorOut;
+
+    public String getErrorOut() {
+        return errorOut;
+    }
+
+    public void setErrorOut(String errorOut) {
+        this.errorOut = errorOut;
+    }
 
     public ExecutorTaskOutput(int exitCode) {
         this.exitCode = exitCode;

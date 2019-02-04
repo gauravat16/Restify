@@ -11,6 +11,8 @@ public class Response {
 
     private String output;
 
+    private String errors;
+
     public Response(String processExecCode) {
         this.processExecCode = processExecCode;
     }
@@ -29,6 +31,14 @@ public class Response {
 
     public void setOutput(String output) {
         this.output = output;
+    }
+
+    public String getErrors() {
+        return errors;
+    }
+
+    public void setErrors(String errors) {
+        this.errors = errors;
     }
 
     @Override

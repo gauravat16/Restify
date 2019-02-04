@@ -7,12 +7,8 @@ package com.gaurav.rest.lambda.services.executor;
 import com.gaurav.rest.lambda.beans.ExecutorTask;
 import com.gaurav.rest.lambda.beans.ExecutorTaskOutput;
 import com.gaurav.rest.lambda.configuration.RestConfigurationManager;
-import org.apache.commons.exec.CommandLine;
-import org.apache.commons.exec.DefaultExecutor;
-import org.apache.commons.exec.ExecuteWatchdog;
-import org.apache.commons.exec.PumpStreamHandler;
+import org.apache.commons.exec.*;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayOutputStream;
@@ -29,22 +25,26 @@ public class ExecutorService {
 
 
     public ExecutorTaskOutput executeTask(ExecutorTask executorTask) throws IOException {
-        ByteArrayOutputStream byteOutputStream = new ByteArrayOutputStream();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        ByteArrayOutputStream errorStream = new ByteArrayOutputStream();
 
-        PumpStreamHandler pumpStreamHandler = new PumpStreamHandler(byteOutputStream);
+        PumpStreamHandler pumpStreamHandler = new PumpStreamHandler(outputStream, errorStream);
+
         CommandLine cmdLine = getCommandLine(executorTask);
 
         DefaultExecutor executor = new DefaultExecutor();
         executor.setWorkingDirectory(new File(executorTask.getPath()));
         executor.setStreamHandler(pumpStreamHandler);
-        ExecuteWatchdog watchdog = new ExecuteWatchdog(executorTask.getWaitTime()*1000);
+        ExecuteWatchdog watchdog = new ExecuteWatchdog(executorTask.getWaitTime() * 1000);
         executor.setWatchdog(watchdog);
 
         int exitValue = executor.execute(cmdLine);
 
         ExecutorTaskOutput taskOutput = new ExecutorTaskOutput(exitValue);
 
-        taskOutput.setOutput(byteOutputStream.toString());
+        taskOutput.setOutput(outputStream.toString());
+        taskOutput.setErrorOut(errorStream.toString());
+
 
         return taskOutput;
 

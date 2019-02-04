@@ -28,10 +28,8 @@ bootJar {
 }
 
 task copyJarForDocker(type: Copy){
-
         from bootJar
         into "docker/springApp"
-
 }
 
 
