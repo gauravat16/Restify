@@ -106,8 +106,6 @@ public class ProcessControllerTest {
 
         }
 
-        assertEquals(response, null);
-
     }
 
 
@@ -148,7 +146,6 @@ public class ProcessControllerTest {
 
         }
 
-        assertEquals(response, null);
     }
 
 
@@ -188,8 +185,6 @@ public class ProcessControllerTest {
             assertEquals(e.getExitValue(), 10);
 
         }
-
-        assertEquals(response, null);
 
     }
 }
