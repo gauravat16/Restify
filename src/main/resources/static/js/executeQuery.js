@@ -141,7 +141,6 @@ function hideResultBoxes() {
     var boxFail = document.getElementById('result-fail-article');
     boxSuccess.style.display = 'none';
     boxFail.style.display = 'none';
-    document.getElementById("json-req").value = JSON.stringify(new LamdaRequest("","","",[],"",[],""),null,4);
 }
 
 /**
