@@ -16,71 +16,110 @@
 
 <body onload="hideResultBoxes()">
 
-    <div id="header"></div>
- 
-    <section class="section is-small">
-        <div class="container">
-            <div class="card">
-                <header class="card-header">
-                    <p class="card-header-title has-text-weight-light">
-                        Lambda request
-                    </p>
-                    <a href="#" class="card-header-icon" aria-label="more options">
+<div id="header"></div>
+
+<div class="container">
+<div class="tile is-ancestor">
+    <div class="tile is-vertical is-12">
+        <div class="tile is-parent">
+            <div class="tile">
+                <div class="tile is-parent is-8">
+
+                    <article class="tile is-child">
+
+
+                    <div class="card">
+                            <header class="card-header">
+                                <p class="card-header-title has-text-weight-light">
+                                    Lambda request
+                                </p>
+                                <a href="#" class="card-header-icon" aria-label="more options">
                         <span class="icon">
                             <i class="fas fa-angle-down" aria-hidden="true"></i>
                         </span>
-                    </a>
-                </header>
-                <div class="card-content">
-                    <div class="content">
-                        <div class="field">
-                            <div class="control">
-                                <textarea class="textarea is-small is-rounded is-primary" rows="15" id="json-req" placeholder="Json request"></textarea>
+                                </a>
+                            </header>
+                            <div class="card-content">
+                                <div class="content">
+                                    <div class="field">
+                                        <div class="control">
+                                <textarea class="textarea is-small is-rounded is-primary" rows="15" id="json-req"
+                                          placeholder="Json request"></textarea>
+                                        </div>
+                                    </div>
+
+
+                                    <button class="button is-primary" id="executebtn" onclick="lamdaPostRequest()">
+                                        Execute
+                                    </button>
+                                </div>
                             </div>
+
                         </div>
-
-
-                        <button class="button is-primary" id="executebtn" onclick="lamdaPostRequest()">Execute</button>
-                    </div>
+                    </article>
                 </div>
 
+                <div class="tile is-parent is-vertical">
+                    <article class="tile is-child notification is-warning">
+                        <p class="title">Try it!</p>
+                        <p class="subtitle">Get a random number.</p>
+                        {<br>
+                        "path": "/app/src/main/resources/static/test_scripts",<br>
+                        "alias":"Random",<br>
+                        "commandType":"sh",<br>
+                        "command":"Random.sh",<br>
+                        "waitTime": "32"<br>
+                        }
+                    </article>
+                </div>
             </div>
 
 
         </div>
 
-    </section>
 
-    <section class="section" >
-        <div class="container">
-            <article class="message is-success is-small hidden" id="result-success-article" >
-                <div class="message-header">
-                    <p>Success</p>
-                    <button class="delete" aria-label="delete" onclick="hideResultBoxes()"></button>
-                </div>
-                <div class="message-body" id="result-success-msg">
-                </div>
-            </article>
+    </div>
 
-            <article class="message is-danger is-small hidden" id="result-fail-article">
-                <div class="message-header">
-                    <p>Failure</p>
-                    <button class="delete" aria-label="delete" onclick="hideResultBoxes()"></button>
-                </div>
-                <div class="message-body" id="result-fail-msg">
-                </div>
-            </article>
+</div>
 
+    <div class="tile is-ancestor">
+        <div class="tile is-vertical is-12">
+            <div class="tile is-parent">
+                <div class="tile">
+                    <div class="tile is-parent is-8">
+                        <div class="tile is-child">
+                            <article class="message is-success is-small hidden" id="result-success-article">
+                                <div class="message-header">
+                                    <p>Success</p>
+                                    <button class="delete" aria-label="delete" onclick="hideResultBoxes()"></button>
+                                </div>
+                                <div class="message-body" id="result-success-msg">
+                                </div>
+                            </article>
+
+                            <article class="message is-danger is-small hidden" id="result-fail-article">
+                                <div class="message-header">
+                                    <p>Failure</p>
+                                    <button class="delete" aria-label="delete" onclick="hideResultBoxes()"></button>
+                                </div>
+                                <div class="message-body" id="result-fail-msg">
+                                </div>
+                            </article>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </section>
+    </div>
+
+
+</div>
+
+
 
 
 </body>
-
-
-
-
-
 
 
 </html>

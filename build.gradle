@@ -24,7 +24,7 @@ repositories {
 }
 
 bootJar {
-    mainClassName = 'com.gaurav.rest.lambda.SpringApp'
+    mainClassName = 'com.gaurav.rest.lambda.RestLambdaApp'
 }
 
 task copyJarForDocker(type: Copy){
