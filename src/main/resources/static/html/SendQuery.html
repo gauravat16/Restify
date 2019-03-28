@@ -6,15 +6,16 @@
 
 
 <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
     <link rel="stylesheet" href="/css/main.css">
     <script src="/js/jquery-3.3.1.min.js"></script>
     <script src="/js/executeQuery.js"></script>
     <link rel="shortcut icon" type="image/png" href="/images/favicon.ico"/>
     <title>Send Request</title>
+
 </head>
 
-<body onload="hideResultBoxes()">
+<body class="has-background-black" onload="hideResultBoxes()">
 
 <div id="header"></div>
 
@@ -43,13 +44,13 @@
                                 <div class="content">
                                     <div class="field">
                                         <div class="control">
-                                <textarea class="textarea is-small is-rounded is-primary" rows="15" id="json-req"
+                                <textarea class="textarea is-small is-rounded" rows="15" id="json-req"
                                           placeholder="Json request"></textarea>
                                         </div>
                                     </div>
 
 
-                                    <button class="button is-primary" id="executebtn" onclick="lamdaPostRequest()">
+                                    <button class="button is-warning" id="executebtn" onclick="lamdaPostRequest()">
                                         Execute
                                     </button>
                                 </div>
@@ -88,7 +89,7 @@
                 <div class="tile">
                     <div class="tile is-parent is-8">
                         <div class="tile is-child">
-                            <article class="message is-success is-small hidden" id="result-success-article">
+                            <article class="message is-warning is-small hidden" id="result-success-article">
                                 <div class="message-header">
                                     <p>Success</p>
                                     <button class="delete" aria-label="delete" onclick="hideResultBoxes()"></button>
@@ -97,7 +98,7 @@
                                 </div>
                             </article>
 
-                            <article class="message is-danger is-small hidden" id="result-fail-article">
+                            <article class="message is-dark is-small hidden" id="result-fail-article">
                                 <div class="message-header">
                                     <p>Failure</p>
                                     <button class="delete" aria-label="delete" onclick="hideResultBoxes()"></button>
