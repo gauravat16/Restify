@@ -1,7 +1,7 @@
 <html>
 
 <head>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
         <link rel="stylesheet" href="/css/main.css">
         <script src="/js/jquery-3.3.1.min.js"></script>
         <script src="/js/executeQuery.js"></script>
@@ -11,23 +11,23 @@
 
 </head>
 
-<body onload="getHistoryPageForPageNumber()">
+<body class="has-background-black" onload="getHistoryPageForPageNumber()">
 
-    <div id="header"></div>
+    <div  id="header"></div>
 
     <div class="section">
         <div class="container" >
-                <table class="table is-striped is-hoverable is-size-6-desktop has-text-weight-light" id="history-table">
-                    <thead>
-                                <tr>
-                                    <th>Path</th>
-                                    <th>Alias</th>
-                                    <th>Command Type</th>
-                                    <th>Args Cmd Type</th>
-                                    <th>Command</th>
-                                    <th>Args Cmd</th>
-                                    <th>Wait Time</th>
-                                    <th>Time Stamp</th>
+                <table class="table  has-text-weight-light has-text-warning has-background-black" id="history-table">
+                    <thead class="has-background-dark">
+                                <tr >
+                                    <th class="has-text-warning">Path</th>
+                                    <th class="has-text-warning">Alias</th>
+                                    <th class="has-text-warning">Command Type</th>
+                                    <th class="has-text-warning">Args Cmd Type</th>
+                                    <th class="has-text-warning">Command</th>
+                                    <th class="has-text-warning">Args Cmd</th>
+                                    <th class="has-text-warning">Wait Time</th>
+                                    <th class="has-text-warning">Time Stamp</th>
 
                                 </tr>
                     </thead>
@@ -37,7 +37,7 @@
                         </tbody>
                     </table>
             <div class="hidden is-size-6-desktop has-text-weight-light" id="error-msg"></div>
-            <button class="button is-outlined is-small is-outlined is-primary" id="loadMore" aria-label="Load More"> Load More</button>
+            <button class="button is-small is-warning" id="loadMore" aria-label="Load More"> Load More</button>
 
         </div>
 
@@ -46,11 +46,11 @@
     <div class="modal is-size-6-desktop has-text-weight-light">
             <div class="modal-background"></div>
             <div class="modal-card">
-              <header class="modal-card-head">
-                <p class="modal-card-title">Response</p>
+              <header class="modal-card-head has-background-black ">
+                <p class="modal-card-title has-text-warning">Response</p>
                 <button class="delete" aria-label="close"></button>
               </header>
-              <section class="modal-card-body">
+              <section class="modal-card-body has-background-dark has-text-warning">
                   <div class="modal-card-body-data"></div>
               </section>
 
