@@ -6,119 +6,117 @@
 
 
 <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
-    <link rel="stylesheet" href="/css/main.css">
-    <script src="/js/jquery-3.3.1.min.js"></script>
-    <script src="/js/executeQuery.js"></script>
-    <link rel="shortcut icon" type="image/png" href="/images/favicon.ico"/>
-    <title>Send Request</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+	<link rel="stylesheet" href="/css/main.css">
+	<script src="/js/jquery-3.3.1.min.js"></script>
+	<script src="/js/executeQuery.js"></script>
+	<link rel="shortcut icon" type="image/png" href="/images/favicon.ico" />
+	<title>Send Request</title>
 
 </head>
 
 <body class="has-background-black" onload="hideResultBoxes()">
 
-<div id="header"></div>
+	<div id="header"></div>
 
-<section class="section">
-</section>
+	<!-- <section class="section">
+</section> -->
 
-<section class="section">
-<div class="container">
-<h1 class="title has-text-warning has-text-weight-light	">Execute Script</h1>
-<h2 class="subtitle has-text-warning has-text-weight-light" >Execute scripts stored on the server</h2>
-	
-<div class="tile is-ancestor ">
-    <div class="tile is-vertical is-12">
-        <div class="tile is-parent">
-            <div class="tile">
-                <div class="tile is-parent is-8">
+	<section class="section">
+		<div class="container">
+			<div class="tile is-ancestor ">
 
-                    <article class="tile is-child">
+				<div class="tile is-parent is-12">
 
+					<div class="tile is-child">
+						<p class="title has-text-warning has-text-weight-light">Execute
+							Script</p>
+						<p class="subtitle has-text-warning has-text-weight-light">Execute
+							scripts stored on the server</p>
+					</div>
+				</div>
+			</div>
 
-                    <div class="card has-background-dark">
-                            <header class="card-header">
-                                <p class="card-header-title has-text-weight-light has-text-warning is-warning">
-                                    Lambda request
-                                </p>
-                            </header>
-                            <div class="card-content">
-                                <div class="content">
-                                    <div class="field">
-                                        <div class="control">
-                                <textarea class="textarea is-small is-rounded is-outlined is-warning has-background-black has-text-warning" rows="15" id="json-req"
-                                          placeholder="Json request"></textarea>
-                                        </div>
-                                    </div>
+			<div class="tile is-ancestor ">
+				<div class="tile is-parent is-8  is-vertical">
 
-
-                                    <button class="button is-warning" id="executebtn" onclick="lamdaPostRequest()">
-                                        Execute
-                                    </button>
-                                </div>
-                            </div>
-
-                        </div>
-                    </article>
-                </div>
-
-                <div class="tile is-parent is-vertical">
-                    <article class="tile is-child notification is-warning">
-                        <p class="title">Try it!</p>
-                        <p class="subtitle">Get a random number.</p>
-                        {<br>
-                        "path": "/app/src/main/resources/static/test_scripts",<br>
-                        "alias":"Random",<br>
-                        "commandType":"bash",<br>
-                        "command":"Random.sh",<br>
-                        "waitTime": "32"<br>
-                        }
-                    </article>
-                </div>
-            </div>
+					<article class="tile is-child">
+						<div class="card has-background-dark">
+							<header class="card-header">
+								<p class="card-header-title has-text-weight-light has-text-warning is-warning">
+									Lambda request</p>
+							</header>
+							<div class="card-content">
+								<div class="content">
+									<div class="field">
+										<div class="control">
+											<textarea
+												class="textarea is-rounded is-outlined is-warning has-background-black has-text-warning is-family-monospace"
+												rows="20" id="json-req" placeholder="Json request"></textarea>
+										</div>
+									</div>
 
 
-        </div>
+									<button class="button is-warning" id="executebtn"
+										onclick="lamdaPostRequest()">Execute</button>
+								</div>
+							</div>
+						</div>
+					</article>
+
+				</div>
 
 
-    </div>
+				<div class="tile is-parent">
 
-</div>
+					<article class="tile is-child notification is-warning">
+						<p class="title">Try it!</p>
+						<div class="content">
+							<p class="subtitle">Get a random number.</p>
 
-    <div class="tile is-ancestor">
-        <div class="tile is-vertical is-12">
-            <div class="tile is-parent">
-                <div class="tile">
-                    <div class="tile is-parent is-8">
-                        <div class="tile is-child">
-                            <article class="message is-warning is-small hidden" id="result-success-article">
-                                <div class="message-header">
-                                    <p>Success</p>
-                                    <button class="delete" aria-label="delete" onclick="hideResultBoxes()"></button>
-                                </div>
-                                <div class="message-body" id="result-success-msg">
-                                </div>
-                            </article>
+							{<br> "path": "/app/src/main/resources/static/test_scripts",<br>
+							"alias":"Random",<br> "commandType":"bash",<br>
+							"command":"Random.sh",<br> "waitTime": "32"<br>}
+						</div>
+												<div class="content">
+						
+							<p class="subtitle">Get weather of your city.</p>
+							{<br> "path": "/app/src/main/resources/static/test_scripts",<br>
+							"alias":"Weather",<br> "commandType":"bash",<br>
+							"command":"GetWeather.sh",<br>"argsCommand":["Delhi"],<br>
+							"waitTime": "32" <br>}
+						</div>
+					</article>
+				</div>
+			</div>
+			<div class="tile is-ancestor">
+				<div class="tile is-parent is-8  is-vertical">
+					<div class="tile is-child">
+						<article class="message is-warning hidden has-text-weight-light" id="result-success-article">
+							<div class="message-header">
+								<p>Success</p>
+								<button class="delete" aria-label="delete" onclick="hideResultBoxes()"></button>
+							</div>
+							<div class="message-body" id="result-success-msg"></div>
+						</article>
 
-                            <article class="message is-dark is-small hidden" id="result-fail-article">
-                                <div class="message-header">
-                                    <p>Failure</p>
-                                    <button class="delete" aria-label="delete" onclick="hideResultBoxes()"></button>
-                                </div>
-                                <div class="message-body" id="result-fail-msg">
-                                </div>
-                            </article>
+						<article class="message is-dark hidden has-text-weight-light" id="result-fail-article">
+							<div class="message-header has-text-weight-light">
+								<p>Failure</p>
+								<button class="delete" aria-label="delete" onclick="hideResultBoxes()"></button>
+							</div>
+							<div class="message-body" id="result-fail-msg"></div>
+						</article>
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+					</div>
+				</div>
+			</div>
+
+		</div>
 
 
-</div>
-</section>
+
+	</section>
 
 </body>
 
