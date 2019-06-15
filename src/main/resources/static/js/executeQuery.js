@@ -1,12 +1,12 @@
 
 /**
  * Lambda request Object
- * @param {*} path 
- * @param {*} alias 
- * @param {*} commandType 
- * @param {*} argsForCommandType 
- * @param {*} command 
- * @param {*} argsForCommand 
+ * @param {*} path
+ * @param {*} alias
+ * @param {*} commandType
+ * @param {*} argsForCommandType
+ * @param {*} command
+ * @param {*} argsForCommand
  */
 var LamdaRequest = function lambdaRequest(path, alias, commandType, argsForCommandType, command, argsForCommand, waitTime) {
     this.path = path;
@@ -20,15 +20,15 @@ var LamdaRequest = function lambdaRequest(path, alias, commandType, argsForComma
 
 /**
  * Lambda History Object.
- * @param {*} path 
- * @param {*} alias 
- * @param {*} commandType 
- * @param {*} argsForCommandType 
- * @param {*} command 
- * @param {*} argsForCommand 
- * @param {*} waitTime 
- * @param {*} lamdaResponse 
- * @param {*} timeStamp 
+ * @param {*} path
+ * @param {*} alias
+ * @param {*} commandType
+ * @param {*} argsForCommandType
+ * @param {*} command
+ * @param {*} argsForCommand
+ * @param {*} waitTime
+ * @param {*} lamdaResponse
+ * @param {*} timeStamp
  */
 var LambdaHistory = function lambdaHistory(path, alias, commandType, argsForCommandType, command, argsForCommand, waitTime, lamdaResponse, timeStamp) {
     this.path = path;
@@ -44,8 +44,8 @@ var LambdaHistory = function lambdaHistory(path, alias, commandType, argsForComm
 
 /**
  * Lambda response object
- * @param {*} processExecCode 
- * @param {*} output 
+ * @param {*} processExecCode
+ * @param {*} output
  */
 var LamdaResponse = function lamdaResponse(processExecCode, output, errors) {
     this.output = output;
@@ -59,7 +59,7 @@ $.ajaxSetup({ timeout: 4000  });
  * Execute an get request.
  * @param {*} urlEndPoint
  * @param params for get request
- * @param {*} callback 
+ * @param {*} callback
  */
 function sendGetRequest(urlEndPoint, params, callback, failCallback, beforeSendCallback, afterSendCallback) {
     beforeSendCallback();
@@ -68,9 +68,9 @@ function sendGetRequest(urlEndPoint, params, callback, failCallback, beforeSendC
 
 /**
  * Execute an post request.
- * @param {*} urlEndPoint 
- * @param {*} callback 
- * @param {*} payload 
+ * @param {*} urlEndPoint
+ * @param {*} callback
+ * @param {*} payload
  */
 function sendPostRequest(urlEndPoint, callback, payload, beforeSendCallback, afterSendCallback) {
     beforeSendCallback();
@@ -116,21 +116,28 @@ function lamdaPostRequest() {
 
 /**
  * Call back function, displays result of lambda.
- * @param {*} lamdaResponse 
+ * @param {*} lamdaResponse
  */
 function displayResult(lamdaResponse) {
+    var msgBoxId = '';
     if (lamdaResponse.processExecCode != 0) {
         var boxFailParent = document.getElementById('result-fail-article');
         var boxFail = document.getElementById('result-fail-msg');
         boxFailParent.style.display = 'inherit';
         boxFail.innerHTML = JSON.stringify(lamdaResponse);
+        msgBoxId = 'result-fail-msg';
 
     } else {
         var boxSuccessParent = document.getElementById('result-success-article');
         var boxSuccess = document.getElementById('result-success-msg');
         boxSuccessParent.style.display = 'inherit';
         boxSuccess.innerHTML = JSON.stringify(lamdaResponse);
+        msgBoxId = 'result-success-msg';
+
     }
+
+    var scrollTo = $('#' +msgBoxId );
+    $("html,body").stop().animate({ scrollTop: scrollTo.offset().top }, 500);
 }
 
 /**
@@ -165,7 +172,7 @@ var lambdaHistoryMap = {};
 
 /**
  * Consumes history json data and will convert them into LambdaHistory objects.
- * @param {*} jsonData 
+ * @param {*} jsonData
  */
 function consumeHistoryJson(jsonData) {
     if (handleMissingHisory(jsonData)) {
@@ -187,7 +194,7 @@ function consumeHistoryJson(jsonData) {
 
 /**
  * Displays history in a table.
- * @param {*} lambdaHistoryList 
+ * @param {*} lambdaHistoryList
  */
 function displayHistory(lambdaHistoryList) {
     var tableBody = $("#history-table-body");
@@ -223,9 +230,9 @@ function displayHistory(lambdaHistoryList) {
 
 /**
  * This function sets up the response modal.
- * 
- * @param {The row that is currently being appended} currRowId 
- * @param {The historyObj that is being converted to a row} historyObj 
+ *
+ * @param {The row that is currently being appended} currRowId
+ * @param {The historyObj that is being converted to a row} historyObj
  */
 function setUpModal(currRowId, historyObj) {
     $("#" + currRowId).click(function () {
@@ -241,7 +248,7 @@ function setUpModal(currRowId, historyObj) {
 
 /**
  * This function scrolls down to an newly added row.
- * @param {The format of a row' Id} rowIdFormat 
+ * @param {The format of a row' Id} rowIdFormat
  */
 function scrollToRow(rowIdFormat) {
     var scrollToElemId = rowIdFormat + currentRowNumber;
@@ -251,8 +258,8 @@ function scrollToRow(rowIdFormat) {
 
 /**
  * This function converts dot separated date string into date Object.
- * 
- * @param {dot separated date} dotDate 
+ *
+ * @param {dot separated date} dotDate
  */
 function formatDate(dotDate) {
     var splitDate = dotDate.split(".");
@@ -263,8 +270,8 @@ function formatDate(dotDate) {
 
 /**
  * This function handles 500 & 0 response codes.
- * 
- * @param {response from sendGetRequest} responseStatus 
+ *
+ * @param {response from sendGetRequest} responseStatus
  */
 function handleErrorsInHistoryRequest(responseStatus) {
     if (responseStatus.status == 500 || responseStatus.status == 0) {
@@ -274,8 +281,8 @@ function handleErrorsInHistoryRequest(responseStatus) {
 
 /**
  * This function handles empty history data.
- * 
- * @param {data obtained by consumeHistoryJson} historyList 
+ *
+ * @param {data obtained by consumeHistoryJson} historyList
  */
 function handleMissingHisory(historyList) {
     if (historyList.length == 0) {
@@ -289,8 +296,8 @@ function handleMissingHisory(historyList) {
 /**
  * This function hides the loadMore button & historyTable(depends on shouldHideTable).
  * Also displays an error msg.
- * 
- * @param {a boolean that dictates if the history table is to be hidden} shouldHideTable 
+ *
+ * @param {a boolean that dictates if the history table is to be hidden} shouldHideTable
  */
 function handleUIForBadResponse(shouldHideTable) {
     var loadMoreBtn = document.getElementById("loadMore");
@@ -310,28 +317,59 @@ function handleUIForBadResponse(shouldHideTable) {
 
 /**
  * Log data
- * @param {*} data 
+ * @param {*} data
  */
 function logData(data) {
     console.log(data);
 }
 
+
 /**
- * Functions ran at document load. 
+ * Functions ran at document load.
  */
 $(document).ready(function () {
-    $("#header").load("/html/Header.html");
+
+    $("#header").load("/html/Header.html", function () {
+        var isDark = localStorage.getItem("dark") === 'true' ;
+        $('#darkmode-switch').prop("checked", isDark);
+        if (isDark){
+            switchToDarkMode()
+        } else {
+            switchToLightMode();
+        }
+
+        $('#darkmode-switch').click(function () {
+            if(!isDark){
+                switchToDarkMode();
+                localStorage.setItem("dark", 'true');
+                isDark=true;
+            }else{
+                switchToLightMode();
+                localStorage.setItem("dark", 'flase');
+                isDark=false;
+
+            }
+        });
+    });
 
     $("#loadMore").click(function (event) {
         event.preventDefault();
         getHistoryPageForPageNumber();
     });
+
+    $('#executebtn').click(function (event) {
+        $('#result-fail-article').hide();
+        $('#result-success-article').hide();
+        lamdaPostRequest();
+    })
+
+
 });
 
 /**
  * Display loading animation.
- * 
- * @param {Button's id which will display loading button} buttonId 
+ *
+ * @param {Button's id which will display loading button} buttonId
  */
 function loadMoreAnimation(buttonId){
     var loadMoreBtn = document.getElementById(buttonId);
@@ -340,12 +378,76 @@ function loadMoreAnimation(buttonId){
 
 /**
  * Remove loading animation.
- * 
- * @param {Button's id which is displaying loading button} buttonId 
+ *
+ * @param {Button's id which is displaying loading button} buttonId
  */
 function loadedMoreAnimationRemoved(buttonId){
     var loadMoreBtn = document.getElementById(buttonId);
     loadMoreBtn.classList.remove('is-loading');
+}
+
+function switchToDarkMode() {
+    addClass("has-background-black", $('body'));
+    switchClass("is-light","is-black", $(".navbar") );
+    addClass("has-text-warning", $(".navbar-item"));
+    addClass("has-text-warning", $("p"));
+    removeClass("has-text-warning", $(".subtitle"));
+    removeClass("has-text-warning", $(".title"));
+    //Re-adding warning text for main title and subtitles
+    addClass("has-text-warning", $("#main_title"));
+    addClass("has-text-warning", $("#main_subtitle"));
+    addClass("has-background-dark", $(".card"));
+    addClass("has-background-black", $("textarea"))
+    addClass("has-text-warning", $("textarea"));
+    switchClass("is-info","is-warning",  $("textarea"));
+    switchClass("is-info","is-warning",  $("button"));
+    switchClass("is-info","is-warning",  $(".tile.is-child.notification"));
+    addClass("has-background-black", $("table"));
+    addClass("has-text-warning", $("table"));
+    addClass("has-background-dark", $("thead"));
+    addClass("has-text-warning", $("th"));
+    addClass("has-background-dark", $(".modal-card-head"));
+    addClass("has-background-black", $(".modal-card-body"));
+    addClass("has-text-warning", $(".modal-card-body"));
+
+}
+
+
+function switchToLightMode() {
+    removeClass("has-background-black", $('body'));
+    switchClass("is-black","is-light", $(".navbar") );
+    removeClass("has-text-warning", $(".navbar-item"));
+    removeClass("has-text-warning", $("p"));
+    removeClass("has-background-dark", $(".card"));
+    removeClass("has-background-black", $("textarea"));
+    removeClass("has-text-warning", $("textarea"));
+    switchClass("is-warning","is-info",  $("textarea"));
+    switchClass("is-warning","is-info",  $("button"));
+    switchClass("is-warning","is-info",  $(".tile.is-child.notification"));
+    switchClass("is-dark","is-light", $("#result-fail-article"));
+    switchClass("is-warning","is-info", $("#result-success-article"));
+    removeClass("has-background-black", $("table"));
+    removeClass("has-text-warning", $("table"));
+    removeClass("has-background-dark", $("thead"));
+    removeClass("has-text-warning", $("th"));
+    removeClass("has-background-dark", $(".modal-card-head"));
+    removeClass("has-background-black", $(".modal-card-body"));
+    removeClass("has-text-warning", $(".modal-card-body"));
+
+}
+
+function switchClass(toBeRemoved,toBeAdded, elem) {
+    removeClass(toBeRemoved, elem);
+    addClass(toBeAdded, elem);
+}
+
+
+function addClass(clazz, elem) {
+    elem.addClass(clazz);
+}
+
+function removeClass(clazz, elem) {
+    elem.removeClass(clazz);
 }
 
 

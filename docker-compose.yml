@@ -7,6 +7,8 @@ app-web:
 
 app-db:
   build: ./docker/mongoDB
+  ports:
+    - "27017:27017"
   expose:
     - "27017"
   volumes_from:

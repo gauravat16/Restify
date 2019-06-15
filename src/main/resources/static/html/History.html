@@ -1,66 +1,81 @@
 <html>
 
 <head>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
-        <link rel="stylesheet" href="/css/main.css">
-        <script src="/js/jquery-3.3.1.min.js"></script>
-        <script src="/js/executeQuery.js"></script>
-        <link rel="shortcut icon" type="image/png" href="/images/favicon.ico"/>
-        <title>History</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/executeQuery.js"></script>
+    <script src="https://kit.fontawesome.com/5dfa8ab75c.js"></script>
+
+    <link rel="shortcut icon" type="image/png" href="/images/favicon.ico"/>
+    <title>History</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
 </head>
 
 <body class="has-background-black" onload="getHistoryPageForPageNumber()">
 
-    <div  id="header"></div>
+<div id="header"></div>
 
-    <div class="section">
-        <div class="container" >
+<div class="section">
+    <div class="container">
+
+        <div class="tile is-ancestor ">
+
+            <div class="tile is-parent is-12">
+
+                <div class="tile is-child">
+                    <p id="main_title" class="title has-text-warning has-text-weight-light">History</p>
+                    <p id="main_subtitle" class="subtitle has-text-warning has-text-weight-light">Table of previous executions</p>
+                </div>
+            </div>
+        </div>
+
         <div class="table-container">
-                <table class="table  has-text-weight-light has-text-warning has-background-black is-fullwidth " id="history-table">
-                    <thead class="has-background-dark">
-                                <tr >
-                                    <th class="has-text-warning">Path</th>
-                                    <th class="has-text-warning">Alias</th>
-                                    <th class="has-text-warning">Command Type</th>
-                                    <th class="has-text-warning">Args Cmd Type</th>
-                                    <th class="has-text-warning">Command</th>
-                                    <th class="has-text-warning">Args Cmd</th>
-                                    <th class="has-text-warning">Wait Time</th>
-                                    <th class="has-text-warning">Time Stamp</th>
+            <table class="table  has-text-weight-light has-text-warning has-background-black is-fullwidth "
+                   id="history-table">
+                <thead class="has-background-dark">
+                <tr>
+                    <th class="has-text-warning">Path</th>
+                    <th class="has-text-warning">Alias</th>
+                    <th class="has-text-warning">Command Type</th>
+                    <th class="has-text-warning">Args Cmd Type</th>
+                    <th class="has-text-warning">Command</th>
+                    <th class="has-text-warning">Args Cmd</th>
+                    <th class="has-text-warning">Wait Time</th>
+                    <th class="has-text-warning">Time Stamp</th>
 
-                                </tr>
-                    </thead>
-                      
-                        <tbody id="history-table-body">
+                </tr>
+                </thead>
 
-                        </tbody>
-                    </table>
-                    </div>
+                <tbody id="history-table-body">
+
+                </tbody>
+            </table>
             <div class="hidden has-text-weight-light" id="error-msg"></div>
             <button class="button is-small is-warning" id="loadMore" aria-label="Load More"> Load More</button>
-
         </div>
+
 
     </div>
 
-    <div class="modal is-size-6-desktop has-text-weight-light">
-            <div class="modal-background"></div>
-            <div class="modal-card">
-              <header class="modal-card-head has-background-dark ">
-                <p class="modal-card-title has-text-warning">Response</p>
-                <button class="delete" aria-label="close"></button>
-              </header>
-              <section class="modal-card-body has-background-black has-text-warning">
-                  <div class="modal-card-body-data"></div>
-              </section>
+</div>
 
-            </div>
-          </div>
-  
+<div class="modal is-size-6-desktop has-text-weight-light">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head has-background-dark ">
+            <p class="modal-card-title has-text-warning">Response</p>
+            <button class="delete" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body has-background-black has-text-warning">
+            <div class="modal-card-body-data"></div>
+        </section>
+
+    </div>
+</div>
+
 
 </body>
 
