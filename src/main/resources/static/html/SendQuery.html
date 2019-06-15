@@ -6,116 +6,105 @@
 
 
 <head>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
-	<link rel="stylesheet" href="/css/main.css">
-	<script src="/js/jquery-3.3.1.min.js"></script>
-	<script src="/js/executeQuery.js"></script>
-	<link rel="shortcut icon" type="image/png" href="/images/favicon.ico" />
-	<title>Send Request</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <script src="https://kit.fontawesome.com/5dfa8ab75c.js"></script>
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/executeQuery.js"></script>
+    <link rel="shortcut icon" type="image/png" href="/images/favicon.ico"/>
+    <title>Send Request</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body class="has-background-black" onload="hideResultBoxes()">
+<body onload="hideResultBoxes()">
 
-	<div id="header"></div>
+<div id="header"></div>
 
+<section class="section">
+    <div class="container">
+        <div class="tile is-ancestor ">
 
-	<section class="section">
-		<div class="container">
-			<div class="tile is-ancestor ">
+            <div class="tile is-parent is-12">
 
-				<div class="tile is-parent is-12">
+                <div class="tile is-child">
+                    <p id="main_title" class="title has-text-weight-light">Execute Programs</p>
+                    <p id="main_subtitle" class="subtitle has-text-weight-light">Runs
+                        programs stored on the server</p>
+                </div>
+            </div>
+        </div>
 
-					<div class="tile is-child">
-						<p class="title has-text-warning has-text-weight-light">Execute Programs</p>
-						<p class="subtitle has-text-warning has-text-weight-light">Runs
-							programs stored on the server</p>
-					</div>
-				</div>
-			</div>
+        <div class="tile is-ancestor ">
+            <div class="tile is-parent is-8  is-vertical">
 
-			<div class="tile is-ancestor ">
-				<div class="tile is-parent is-8  is-vertical">
-
-					<article class="tile is-child">
-						<div class="card has-background-dark">
-							<header class="card-header">
-								<p class="card-header-title has-text-weight-light has-text-warning is-warning">
-									Lambda request</p>
-							</header>
-							<div class="card-content">
-								<div class="content">
-									<div class="field">
-										<div class="control">
-											<textarea
-												class="textarea is-rounded is-outlined is-warning has-background-black has-text-warning is-family-monospace"
-												rows="20" id="json-req" placeholder="Json request"></textarea>
-										</div>
-									</div>
+                <article class="tile is-child">
+                    <div class="card">
+                        <header class="card-header">
+                            <p class="card-header-title has-text-weight-light is-warning">
+                                Lambda request</p>
+                        </header>
+                        <div class="card-content">
+                            <div class="content">
+                                <div class="field">
+                                    <div class="control">
+                                        <textarea class="textarea is-rounded is-outlined is-family-monospace is-info" rows="15" id="json-req" placeholder="Json request"></textarea>
+                                    </div>
+                                </div>
 
 
-									<button class="button is-warning" id="executebtn"
-										onclick="lamdaPostRequest()">Execute</button>
-								</div>
-							</div>
-						</div>
-					</article>
+                                <button class="button is-info" id="executebtn">Execute
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
 
-				</div>
-
-
-				<div class="tile is-parent">
-
-					<article class="tile is-child notification is-warning">
-						<p class="title">Try it!</p>
-						<div class="content">
-							<p class="subtitle">Get a random number.</p>
-
-							{<br> "path": "/app/src/main/resources/static/test_scripts",<br>
-							"alias":"Random",<br> "commandType":"bash",<br>
-							"command":"Random.sh",<br> "waitTime": "32"<br>}
-						</div>
-												<div class="content">
-						
-							<p class="subtitle">Get weather of your city.</p>
-							{<br> "path": "/app/src/main/resources/static/test_scripts",<br>
-							"alias":"Weather",<br> "commandType":"bash",<br>
-							"command":"GetWeather.sh",<br>"argsCommand":["Delhi"],<br>
-							"waitTime": "32" <br>}
-						</div>
-					</article>
-				</div>
-			</div>
-			<div class="tile is-ancestor">
-				<div class="tile is-parent is-8  is-vertical">
-					<div class="tile is-child">
-						<article class="message is-warning hidden has-text-weight-light" id="result-success-article">
-							<div class="message-header">
-								<p>Success</p>
-								<button class="delete" aria-label="delete" onclick="hideResultBoxes()"></button>
-							</div>
-							<div class="message-body" id="result-success-msg"></div>
-						</article>
-
-						<article class="message is-dark hidden has-text-weight-light" id="result-fail-article">
-							<div class="message-header has-text-weight-light">
-								<p>Failure</p>
-								<button class="delete" aria-label="delete" onclick="hideResultBoxes()"></button>
-							</div>
-							<div class="message-body" id="result-fail-msg"></div>
-						</article>
-
-					</div>
-				</div>
-			</div>
-
-		</div>
+            </div>
 
 
+            <div class="tile is-parent">
 
-	</section>
+                <article class="tile is-child notification is-info">
+                    <p class="title">Try it!</p>
+
+                    <div class="content">
+
+                        <p class="subtitle">Get weather of your city.</p>
+                        {<br> "path": "/app/src/main/resources/static/test_scripts",<br>
+                        "alias":"Weather",<br> "commandType":"bash",<br>
+                        "command":"GetWeather.sh",<br>"argsCommand":["Delhi"],<br>
+                        "waitTime": "32" <br>}
+                    </div>
+                </article>
+            </div>
+        </div>
+        <div class="tile is-ancestor">
+            <div class="tile is-parent is-8  is-vertical">
+                <div class="tile is-child">
+                    <article class="message hidden has-text-weight-light is-info" id="result-success-article" style="display: none;">
+                        <div class="message-header">
+                            Success
+                            <button class="delete" aria-label="delete" onclick="hideResultBoxes()"></button>
+                        </div>
+                        <div class="message-body" id="result-success-msg"></div>
+                    </article>
+
+                    <article class="message hidden has-text-weight-light is-light" id="result-fail-article" style="display: none;">
+                        <div class="message-header has-text-weight-light">
+                            Failure
+                            <button class="delete" aria-label="delete" onclick="hideResultBoxes()"></button>
+                        </div>
+                        <div class="message-body" id="result-fail-msg"></div>
+                    </article>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</section>
 
 </body>
 

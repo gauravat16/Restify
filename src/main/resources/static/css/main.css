@@ -5,3 +5,144 @@
 .height-body{
 height : auto;
 }
+
+
+.switch {
+    display: inline-block;
+    height: 34px;
+    position: relative;
+    width: 60px;
+}
+
+.switch input {
+    display:none;
+}
+
+.slider {
+    background-color: #ccc;
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: .4s;
+}
+
+.slider:before {
+    background-color: #fff;
+    bottom: 4px;
+    content: "";
+    height: 26px;
+    left: 4px;
+    position: absolute;
+    transition: .4s;
+    width: 26px;
+}
+
+input:checked + .slider {
+    background-color: #ffe12c;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+body.dark {
+    background-color: #0a0a0a;
+}
+
+/*body.dark .navbar{*/
+/*    background-color: #0a0a0a;*/
+/*    color: #ffdd57;*/
+/*}*/
+
+/*body.dark .navbar-item{*/
+/*    color: #ffdd57 !important;*/
+/*}*/
+
+body.dark p{
+    color: #ffdd57;
+}
+
+body.dark p.subtitle{
+    border-color: transparent;
+    color: rgba(0, 0, 0, 0.7) !important ;
+}
+
+body.dark p.title{
+    border-color: transparent;
+    color: rgba(0, 0, 0, 0.7) !important ;
+}
+
+body.dark #main_title{
+    color: #ffdd57 !important;
+}
+
+body.dark #main_subtitle{
+    color: #ffdd57 !important;
+}
+
+body.dark .card{
+    background-color: #363636;
+    color: #ffdd57;
+}
+
+body.dark textarea{
+    background-color: #0a0a0a;
+    color: #ffdd57 !important;
+    border-color: #ffdd57 !important;
+}
+
+body.dark button{
+    background-color: #ffdd57 !important;
+    border-color: transparent;
+    color: rgba(0, 0, 0, 0.7) !important ;
+}
+
+body.dark .tile.is-child.notification{
+    background-color: #ffdd57;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+
+body.dark table{
+    background-color: #363636;
+    color: #ffdd57;
+}
+
+body.dark thead{
+    background-color: #363636;
+}
+
+body.dark th{
+    color: #ffdd57;
+}
+
+body.dark .message-body p{
+    color: rgba(0, 0, 0, 0.7) !important;
+}
+
+body.dark .modal-card-head{
+    background-color: #363636;
+}
+
+body.dark .modal-card-body{
+    background-color: #0a0a0a;
+    color: #ffdd57;
+}
+
+
+
+
+
+
+
