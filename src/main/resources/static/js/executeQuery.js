@@ -124,14 +124,14 @@ function displayResult(lamdaResponse) {
         var boxFailParent = document.getElementById('result-fail-article');
         var boxFail = document.getElementById('result-fail-msg');
         boxFailParent.style.display = 'inherit';
-        boxFail.innerHTML = JSON.stringify(lamdaResponse);
+        $('#result-fail-msg').html(JSON.stringify(lamdaResponse));
         msgBoxId = 'result-fail-msg';
 
     } else {
         var boxSuccessParent = document.getElementById('result-success-article');
         var boxSuccess = document.getElementById('result-success-msg');
         boxSuccessParent.style.display = 'inherit';
-        boxSuccess.innerHTML = JSON.stringify(lamdaResponse);
+        $('#result-success-msg').html(JSON.stringify(lamdaResponse));
         msgBoxId = 'result-success-msg';
 
     }
@@ -306,11 +306,11 @@ function handleUIForBadResponse(shouldHideTable) {
 
     loadMoreBtn.style.visibility = 'hidden';
     if (shouldHideTable) {
-        hiddenErrorDiv.innerHTML = "Sorry there is no data to display.";
+        hiddenErrorDiv.innerHTML = "<p>Sorry there is no data to display.</p>";
         historyTable.classList.add("hidden");
         hiddenErrorDiv.classList.remove("hidden");
     } else {
-        hiddenErrorDiv.innerHTML = "You have reached the end of history.";
+        hiddenErrorDiv.innerHTML = "<p>You have reached the end of history.</p>";
         hiddenErrorDiv.classList.remove("hidden");
     }
 }
@@ -322,7 +322,6 @@ function handleUIForBadResponse(shouldHideTable) {
 function logData(data) {
     console.log(data);
 }
-
 
 /**
  * Functions ran at document load.
@@ -387,52 +386,57 @@ function loadedMoreAnimationRemoved(buttonId){
 }
 
 function switchToDarkMode() {
-    addClass("has-background-black", $('body'));
+    addClass("dark", $("body"));
+
+    // addClass("has-background-black", $('body'));
     switchClass("is-light","is-black", $(".navbar") );
     addClass("has-text-warning", $(".navbar-item"));
-    addClass("has-text-warning", $("p"));
-    removeClass("has-text-warning", $(".subtitle"));
-    removeClass("has-text-warning", $(".title"));
-    //Re-adding warning text for main title and subtitles
-    addClass("has-text-warning", $("#main_title"));
-    addClass("has-text-warning", $("#main_subtitle"));
-    addClass("has-background-dark", $(".card"));
-    addClass("has-background-black", $("textarea"))
-    addClass("has-text-warning", $("textarea"));
-    switchClass("is-info","is-warning",  $("textarea"));
-    switchClass("is-info","is-warning",  $("button"));
-    switchClass("is-info","is-warning",  $(".tile.is-child.notification"));
-    addClass("has-background-black", $("table"));
-    addClass("has-text-warning", $("table"));
-    addClass("has-background-dark", $("thead"));
-    addClass("has-text-warning", $("th"));
-    addClass("has-background-dark", $(".modal-card-head"));
-    addClass("has-background-black", $(".modal-card-body"));
-    addClass("has-text-warning", $(".modal-card-body"));
+    // addClass("has-text-warning", $("p"));
+    // removeClass("has-text-warning", $(".subtitle"));
+    // removeClass("has-text-warning", $(".title"));
+    // //Re-adding warning text for main title and subtitles
+    // addClass("has-text-warning", $("#main_title"));
+    // addClass("has-text-warning", $("#main_subtitle"));
+    // addClass("has-background-dark", $(".card"));
+    // addClass("has-background-black", $("textarea"))
+    // addClass("has-text-warning", $("textarea"));
+    // switchClass("is-info","is-warning",  $("textarea"));
+    // switchClass("is-info","is-warning",  $("button"));
+    // switchClass("is-info","is-warning",  $(".tile.is-child.notification"));
+    // addClass("has-background-black", $("table"));
+    // addClass("has-text-warning", $("table"));
+    // addClass("has-background-dark", $("thead"));
+    // addClass("has-text-warning", $("th"));
+    // addClass("has-background-dark", $(".modal-card-head"));
+    // addClass("has-background-black", $(".modal-card-body"));
+    // addClass("has-text-warning", $(".modal-card-body"));
+    switchClass("is-light","is-dark", $("#result-fail-article"));
+    switchClass("is-info","is-warning", $("#result-success-article"));
 
 }
 
 
 function switchToLightMode() {
-    removeClass("has-background-black", $('body'));
+    removeClass("dark", $("body"));
+    // removeClass("has-background-black", $('body'));
     switchClass("is-black","is-light", $(".navbar") );
     removeClass("has-text-warning", $(".navbar-item"));
-    removeClass("has-text-warning", $("p"));
-    removeClass("has-background-dark", $(".card"));
-    removeClass("has-background-black", $("textarea"));
-    removeClass("has-text-warning", $("textarea"));
-    switchClass("is-warning","is-info",  $("textarea"));
-    switchClass("is-warning","is-info",  $("button"));
-    switchClass("is-warning","is-info",  $(".tile.is-child.notification"));
+    // removeClass("has-text-warning", $("p"));
+    // removeClass("has-background-dark", $(".card"));
+    // removeClass("has-background-black", $("textarea"));
+    // removeClass("has-text-warning", $("textarea"));
+    // switchClass("is-warning","is-info",  $("textarea"));
+    // switchClass("is-warning","is-info",  $("button"));
+    // switchClass("is-warning","is-info",  $(".tile.is-child.notification"));
     switchClass("is-dark","is-light", $("#result-fail-article"));
     switchClass("is-warning","is-info", $("#result-success-article"));
-    removeClass("has-background-black", $("table"));
-    removeClass("has-text-warning", $("table"));
-    removeClass("has-background-dark", $("thead"));
-    removeClass("has-text-warning", $("th"));
-    removeClass("has-background-dark", $(".modal-card-head"));
-    removeClass("has-background-black", $(".modal-card-body"));
-    removeClass("has-text-warning", $(".modal-card-body"));
+    // removeClass("has-background-black", $("table"));
+    // removeClass("has-text-warning", $("table"));
+    // removeClass("has-background-dark", $("thead"));
+    // removeClass("has-text-warning", $("th"));
+    // removeClass("has-background-dark", $(".modal-card-head"));
+    // removeClass("has-background-black", $(".modal-card-body"));
+    // removeClass("has-text-warning", $(".modal-card-body"));
 
 }
 

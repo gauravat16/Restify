@@ -14,10 +14,9 @@
 
 </head>
 
-<body class="has-background-black" onload="getHistoryPageForPageNumber()">
+<body onload="getHistoryPageForPageNumber()">
 
 <div id="header"></div>
-
 <div class="section">
     <div class="container">
 
@@ -26,36 +25,40 @@
             <div class="tile is-parent is-12">
 
                 <div class="tile is-child">
-                    <p id="main_title" class="title has-text-warning has-text-weight-light">History</p>
-                    <p id="main_subtitle" class="subtitle has-text-warning has-text-weight-light">Table of previous executions</p>
+                    <p id="main_title" class="title has-text-weight-light">History</p>
+                    <p id="main_subtitle" class="subtitle has-text-weight-light">Table of previous executions</p>
                 </div>
             </div>
         </div>
 
-        <div class="table-container">
-            <table class="table  has-text-weight-light has-text-warning has-background-black is-fullwidth "
-                   id="history-table">
-                <thead class="has-background-dark">
-                <tr>
-                    <th class="has-text-warning">Path</th>
-                    <th class="has-text-warning">Alias</th>
-                    <th class="has-text-warning">Command Type</th>
-                    <th class="has-text-warning">Args Cmd Type</th>
-                    <th class="has-text-warning">Command</th>
-                    <th class="has-text-warning">Args Cmd</th>
-                    <th class="has-text-warning">Wait Time</th>
-                    <th class="has-text-warning">Time Stamp</th>
+        <div class="card">
+            <div class="card-content">
+                <div class="table-container">
+                    <table class="table has-text-weight-light is-fullwidth" id="history-table">
+                        <thead class="">
+                        <tr>
+                            <th class="">Path</th>
+                            <th class="">Alias</th>
+                            <th class="">Command Type</th>
+                            <th class="">Args Cmd Type</th>
+                            <th class="">Command</th>
+                            <th class="">Args Cmd</th>
+                            <th class="">Wait Time</th>
+                            <th class="">Time Stamp</th>
 
-                </tr>
-                </thead>
+                        </tr>
+                        </thead>
 
-                <tbody id="history-table-body">
+                        <tbody id="history-table-body"></tbody>
 
-                </tbody>
-            </table>
-            <div class="hidden has-text-weight-light" id="error-msg"></div>
-            <button class="button is-small is-warning" id="loadMore" aria-label="Load More"> Load More</button>
+                    </table>
+                    <div class="hidden has-text-weight-light" id="error-msg"></div>
+                    <button class="button is-small is-info" id="loadMore" aria-label="Load More"> Load More</button>
+                </div>
+            </div>
         </div>
+
+
 
 
     </div>
@@ -65,11 +68,11 @@
 <div class="modal is-size-6-desktop has-text-weight-light">
     <div class="modal-background"></div>
     <div class="modal-card">
-        <header class="modal-card-head has-background-dark ">
-            <p class="modal-card-title has-text-warning">Response</p>
-            <button class="delete" aria-label="close"></button>
+        <header class="modal-card-head">
+            <p class="modal-card-title">Response</p>
+            <button class="delete is-info" aria-label="close"></button>
         </header>
-        <section class="modal-card-body has-background-black has-text-warning">
+        <section class="modal-card-body">
             <div class="modal-card-body-data"></div>
         </section>
 
