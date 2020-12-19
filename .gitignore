@@ -56,3 +56,12 @@ fabric.properties
 
 # Editor-based Rest Client
 .idea/httpRequests
+
+bin/
+
+.classpath
+.project
+.settings/
+docker/springApp/
+src/main/resources/static/test_scripts/resources/
+
